@@ -7,6 +7,12 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
+
+	<properties>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+	</properties>
+	
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
 		<dependency>
@@ -24,21 +30,21 @@
 		</dependency>
 
 		<dependency>
-  			<groupId>org.springframework</groupId>
-  			<artifactId>spring-webmvc</artifactId>
-  			<version>5.2.8.RELEASE</version>
-  		</dependency>
-  		
-  		<dependency>
-  			<groupId>org.springframework</groupId>
-  			<artifactId>spring-orm</artifactId>
-  			<version>5.2.8.RELEASE</version>
-  		</dependency>
-  		
-  		<dependency>
-  			<groupId>org.springframework</groupId>
-  			<artifactId>spring-jdbc</artifactId>
-  			<version>5.2.8.RELEASE</version>
-  		</dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>5.2.8.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>5.2.8.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>5.2.8.RELEASE</version>
+		</dependency>
 	</dependencies>
 </project>
