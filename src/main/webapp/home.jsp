@@ -16,7 +16,7 @@
 			<img src="img/bg.svg">
 		</div>
 		<div class="login-content">
-			<form action="index.html">
+			<form action="userdashboard">
 				<img src="img/avatar.svg">
 				<h2 class="title">Welcome</h2>
            		<div class="input-div one">
@@ -39,7 +39,8 @@
             	</div>
             	<a href="#">Forgot Password?</a>
             	<input type="submit" class="btn" value="Login">
-	<input type="submit" class="btn" value="Register">
+	<!-- <input type="submit" class="btn" value="Register" onClick="register"> -->
+	<a href="register">Click here to register</a>
             </form>
         </div>
     </div>

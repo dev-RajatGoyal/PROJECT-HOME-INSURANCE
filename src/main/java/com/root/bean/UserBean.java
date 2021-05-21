@@ -4,21 +4,13 @@ public class UserBean {
 
 	private int user_id;
 	
-	private String user_name;
+	private String username;
 	private String role;
 	private String password;
-	private String confirmPassword;
+	private String cpassword;
 	
 	public UserBean() {
 		// TODO Auto-generated constructor stub
-	}
-
-	public UserBean(int user_id, String user_name, String password, String role) {
-		super();
-		this.user_id = user_id;
-		this.user_name = user_name;
-		this.password = password;
-		this.role = role;
 	}
 
 	public int getUser_id() {
@@ -29,28 +21,12 @@ public class UserBean {
 		this.user_id = user_id;
 	}
 
-	public String getUser_name() {
-		return user_name;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setUser_name(String user_name) {
-		this.user_name = user_name;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getConfirmPassword() {
-		return confirmPassword;
-	}
-
-	public void setConfirmPassword(String confirmPassword) {
-		this.confirmPassword = confirmPassword;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getRole() {
@@ -61,11 +37,28 @@ public class UserBean {
 		this.role = role;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getCpassword() {
+		return cpassword;
+	}
+
+	public void setCpassword(String cpassword) {
+		this.cpassword = cpassword;
+	}
+
 	@Override
 	public String toString() {
-		return "User [user_id=" + user_id + ", user_name=" + user_name + ", password=" + password + ", role=" + role
-				+ "]";
+		return "UserBean [user_id=" + user_id + ", username=" + username + ", role=" + role + ", password=" + password
+				+ ", cpassword=" + cpassword + "]";
 	}
+
 	
 	
 }

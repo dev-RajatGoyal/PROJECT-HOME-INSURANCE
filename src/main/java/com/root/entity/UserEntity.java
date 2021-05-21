@@ -1,5 +1,6 @@
 package com.root.entity;
 
+import javax.persistence.Column;
 //import javax.persistence.Column;  
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,6 +19,7 @@ public class UserEntity {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int user_id;
 	
+	@Column(unique = true)
 	private String user_name;
 	private String role;
 	private String password;
