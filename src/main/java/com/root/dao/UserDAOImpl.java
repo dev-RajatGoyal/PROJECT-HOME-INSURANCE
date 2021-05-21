@@ -16,7 +16,7 @@ public class UserDAOImpl implements UserDAO {
 		try
 		{	
 			
-			EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("unit1");		
+			EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("unit1");	
 			entityManager = entityManagerFactory.createEntityManager();
 			entityManager.getTransaction().begin();
 			
