@@ -2,8 +2,7 @@ package com.root.bean;
 
 public class UserBean {
 
-	private int user_id;
-	
+	private int userid;
 	private String username;
 	private String role;
 	private String password;
@@ -13,12 +12,12 @@ public class UserBean {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getUser_id() {
-		return user_id;
+	public int getuserid() {
+		return userid;
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setuserid(int userid) {
+		this.userid = userid;
 	}
 
 	public String getUsername() {
@@ -55,7 +54,7 @@ public class UserBean {
 
 	@Override
 	public String toString() {
-		return "UserBean [user_id=" + user_id + ", username=" + username + ", role=" + role + ", password=" + password
+		return "UserBean [userid=" + userid + ", username=" + username + ", role=" + role + ", password=" + password
 				+ ", cpassword=" + cpassword + "]";
 	}
 

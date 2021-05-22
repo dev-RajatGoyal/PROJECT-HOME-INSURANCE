@@ -14,6 +14,15 @@
 		<h2>REGISTRATION FORM</h2>
 	</div>
 	<form class="form" id="form" action="registersuccess" method="post">
+		
+		<div class="form-control">
+			<label>User Id</label>
+			<input type="number" name="userid" id="username" placeholder="Enter your User Id" autocomplete="off">
+			<i class="fas fa-check-circle"></i>
+			<i class="fas fa-exclamation-circle"></i>
+			<small>Error message</small>
+		</div>
+		
 		<div class="form-control">
 			<label>Username</label>
 			<input type="text" name="username" id="username" placeholder="Enter your Username" autocomplete="off">

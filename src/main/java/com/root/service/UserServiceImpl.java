@@ -19,8 +19,8 @@ public class UserServiceImpl implements UserService
 
 	@Override
 	public UserBean viewUserByUserId(int userId) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return userDao.viewUserByUserId(userId);
 	}
 
 }

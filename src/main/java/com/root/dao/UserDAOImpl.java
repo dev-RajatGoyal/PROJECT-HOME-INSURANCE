@@ -1,4 +1,5 @@
 package com.root.dao;
+
 import javax.persistence.EntityManager; 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -21,6 +22,7 @@ public class UserDAOImpl implements UserDAO {
 			entityManager.getTransaction().begin();
 			
 			UserEntity userEntity = new UserEntity();
+			userEntity.setUser_id(userBean.getuserid());
 			userEntity.setUser_name(userBean.getUsername());
 			userEntity.setRole(userBean.getRole());
 			userEntity.setPassword(userBean.getPassword());
@@ -39,7 +41,10 @@ public class UserDAOImpl implements UserDAO {
 		}
 		finally
 		{
-			entityManager.close();
+			if(entityManager!=null)
+			{
+				entityManager.close();
+			}
 		}
 		return userName;
 	}
@@ -47,20 +52,36 @@ public class UserDAOImpl implements UserDAO {
 	public UserBean viewUserByUserId(int userId)
 	{
 		UserBean userBean=new UserBean();
-		
-		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("unit1");	
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		entityManager.getTransaction().begin();
-		
-		UserEntity userEntity=entityManager.find(UserEntity.class, userId);
-		
-		userBean.setUser_id(userEntity.getUser_id());
-		userBean.setUsername(userEntity.getUser_name());
-		userBean.setRole(userEntity.getRole());
-		userBean.setPassword(userEntity.getPassword());
-		userBean.setCpassword(userEntity.getConfirmPassword());
-		
-		entityManager.getTransaction().commit();
-		return userBean;
+		EntityManager entityManager = null;
+		try
+		{
+			
+			EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("unit1");	
+			entityManager = entityManagerFactory.createEntityManager();
+			entityManager.getTransaction().begin();
+			
+			UserEntity userEntity=entityManager.find(UserEntity.class, userId);
+			
+			userBean.setuserid(userEntity.getUser_id());
+			userBean.setUsername(userEntity.getUser_name());
+			userBean.setRole(userEntity.getRole());
+			userBean.setPassword(userEntity.getPassword());
+			userBean.setCpassword(userEntity.getConfirmPassword());
+			
+			entityManager.getTransaction().commit();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(entityManager!=null)
+			{
+				entityManager.close();
+			}
+		}
+			return userBean;
 	}
+
 }
