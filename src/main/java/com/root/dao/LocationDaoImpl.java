@@ -22,6 +22,9 @@ public class LocationDaoImpl implements LocationDao {
 
 			LocationEntity locationEntity = new LocationEntity();
 			PropertyEntity propertyEntity = new PropertyEntity();
+			
+			
+			System.out.println("dao "+locationBean +""+ propertyBean+""+userEntity);
 
 			/**
 			 * convert propertyBean object to propertyEntity because we need to give entity
@@ -52,11 +55,14 @@ public class LocationDaoImpl implements LocationDao {
 			locationEntity.setResidence_type(locationBean.getResidence_type());
 			locationEntity.setResidence_use(locationBean.getResidence_use());
 			locationEntity.setZip_code(locationBean.getZip_code());
+			
+			
 			locationEntity.setPropertyEntity(propertyEntity);
 			locationEntity.setUserEntity(userEntity);
 
 			entityManager.getTransaction().begin();
 			entityManager.persist(locationEntity);
+			System.out.println("location and property add successfully");
 			entityManager.getTransaction().commit();
 
 		} catch (Exception e) {

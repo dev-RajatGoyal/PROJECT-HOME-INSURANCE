@@ -9,6 +9,13 @@ public class PropertyBean {
 	private String dwelling_type;
 	private String roof_material;
 	private String garage_type;
+	@Override
+	public String toString() {
+		return "PropertyBean [property_id=" + property_id + ", market_value=" + market_value + ", year_built="
+				+ year_built + ", square_footage=" + square_footage + ", dwelling_type=" + dwelling_type
+				+ ", roof_material=" + roof_material + ", garage_type=" + garage_type + ", full_baths=" + full_baths
+				+ ", half_baths=" + half_baths + ", pool=" + pool + "]";
+	}
 	private int full_baths;
 	private int half_baths;
 	private int pool;

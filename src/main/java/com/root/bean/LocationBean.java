@@ -61,6 +61,12 @@ public class LocationBean {
 	public void setResidence_use(String residence_use) {
 		this.residence_use = residence_use;
 	}
+	@Override
+	public String toString() {
+		return "LocationBean [location_id=" + location_id + ", residence_type=" + residence_type + ", address_line_1="
+				+ address_line_1 + ", address_line_2=" + address_line_2 + ", city=" + city + ", location_state="
+				+ location_state + ", zip_code=" + zip_code + ", residence_use=" + residence_use + "]";
+	}
 	
 	
 	

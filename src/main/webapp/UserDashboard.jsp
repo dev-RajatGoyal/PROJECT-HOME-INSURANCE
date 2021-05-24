@@ -3,347 +3,122 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>User DashBoard</title>
-<script src="https://code.jquery.com/jquery-1.10.2.js"
-	type="text/javascript"></script>
+<meta charset="UTF-8">
+<title>User Dashboard</title>
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css"
+	rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="css/menu-style.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script type="text/javascript" src="dist/js/menu.js"></script>
+<style>
+.content {
+	margin: 3rem;
+}
+
+.lead {
+	font-size: 1.5rem;
+	font-weight: 300;
+}
+</style>
+
+
 </head>
 <body>
+	<!--wrapper start-->
+	<div class="wrapper">
 
-	<div id="dashboard">
-		<h1>
-			Hello <br> ${user.username} <br> Welcome to user dashboard
-
-		</h1>
-		<button id="ownerBTN">Add HomeOwner details</button>
-		<br>
-		<button id="location">Add Location details</button>
-	</div>
-
-
-
-
-
-
-
-	<!--------------------------------- Home Owner Page --------------------------------------->
-	<div id="owner">
-		<div class="container">
-			<div class="header">
-				<h2>Owner Info FORM</h2>
+		<!--sidebar start-->
+		<div class="sidebar">
+			<div class="sidebar-menu">
+				<center class="profile">
+					<img src="img/avatar.png" alt="">
+					<p>User Dashboard</p>
+				</center>
+				<li class="item"><a href="" class="menu-btn"><i
+						class="fas fa-desktop"></i><span>Dashboard</span></a></li>
+				<li class="item" id="profile"><a href="#profile"
+					class="menu-btn"> <i class="fas fa-user-circle"></i><span>Get
+							Quote<i class="fas fa-chevron-down drop-down"></i>
+					</span>
+				</a>
+					<div class="sub-menu">
+						<a href="#"><i class="fas fa-image"></i><span>Homeowner
+								Page</span></a> <a href="userDashboard1"><i class="fas fa-address-card"></i><span>Location
+								Page</span></a> <a href=""><i class="fas fa-address-card"></i><span>Property
+								Page</span></a> <a href="#"><i class="fas fa-address-card"></i><span>Quote
+								Page</span></a>
+					</div></li>
+				<li class="item" id="messege"><a href="#messege"
+					class="menu-btn"> <i class="fas fa-envelope"></i><span>
+							Retrieve Quote<i class="fas fa-chevron-down drop-down"></i>
+					</span>
+				</a>
+					<div class="sub-menu">
+						<a href="#"><i class="fas fa-envelope"></i><span>Retrieve
+								Quote Page</span></a> <a href="#"><i class="fas fa-envelope-square"></i><span>Quote
+								Summary Page</span></a>
+					</div></li>
+				<li class="item" id="buyPolicy"><a href="#buyPolicy"
+					class="menu-btn"> <i class="fas fa-cog"></i><span>Buy
+							Policy <i class="fas fa-chevron-down drop-down"></i>
+					</span>
+				</a>
+					<div class="sub-menu">
+						<a href="#"><i class="fas fa-lock"></i><span>Password</span></a> <a
+							href="#"><i class="fas fa-language"></i><span>Language</span></a>
+					</div></li>
+				<li class="item" id="cancelPolicy"><a href="#cancelPoicy"
+					class="menu-btn"> <i class="fas fa-cog"></i><span>
+							Cancel Policy<i class="fas fa-chevron-down drop-down"></i>
+					</span></a></li>
+				<li class="item" id="renewPolicy"><a href="#renewPolicy"
+					class="menu-btn"> <i class="fas fa-cog"></i><span>Renew
+							Policy <i class="fas fa-chevron-down drop-down"></i>
+					</span></a></li>
+				<li class="item" id="viewPolicy"><a href="#viewPolicy"
+					class="menu-btn"> <i class="fas fa-cog"></i><span>View
+							Policy <i class="fas fa-chevron-down drop-down"></i>
+					</span></a></li>
+				<li class="item"><a href="" class="menu-btn"><i
+						class="fas fa-info-circle"></i><span>Log Out</span></a></li>
 			</div>
-			<center>
-				<form action="fname" id="fname">
-					<div class="form-control">
-						<label>First Name</label> <input type="text" name="" id="fname"
-							placeholder="Enter your First Name" autocomplete="off"> <i
-							class="fas fa-check-circle"></i> <i
-							class="fas fa-exclamation-circle"></i> <small>Error
-							message</small>
-					</div>
 		</div>
-		<center>
-			<form action="lname" id="lname">
-				<div class="form-control">
-					<label>Last Name</label> <input type="text" name="" id="lname"
-						placeholder="Enter your Last Name" autocomplete="off"> <i
-						class="fas fa-check-circle"></i> <i
-						class="fas fa-exclamation-circle"></i> <small>Error
-						message</small> <br> <br>
+		<!--sidebar end-->
+		<!--header menu start-->
+		<div class="header">
+			<div class="header-menu">
+				<div class="title">
+					<span class="title-hide">User<span class="sec-span">Dashboard</span></span>
 				</div>
-
-				<div class="form-control">
-					<label>Enter Date of Birth <label> <input
-							type="date" name=? id="dob"> <i
-							class="fas fa-check-circle"></i> <i
-							class="fas fa-exclamation-circle"></i> <small>Error
-								message</small> <br> <br>
+				<div class="sidebar-btn">
+					<i class="fas fa-bars"></i>
 				</div>
-				<div class="form-control">
-
-					<label>Are you retired</label> <select>
-						<option>Choose Options</option>
-						<option>YES</option>
-						<option>NO</option>
-
-					</select> <i class="fas fa-check-circle"></i> <i
-						class="fas fa-exclamation-circle"></i> <small>Error
-						message</small> <br> <br>
-				</div>
-
-
-				<div class="form-control">
-					<label>Social Security number </label> <input type="number" name=""
-						id="SSN" placeholder="Enter your SSN" autocomplete="off">
-					<i class="fas fa-check-circle"></i> <i
-						class="fas fa-exclamation-circle"></i> <small>Error
-						message</small> <br> <br>
-				</div>
-
-				<div class="form-control">
-					<label>Email Address</label> <input type="email" name=? id=emailId
-						placeholder="Enter your EmailID " autocomplete="off"> <i
-						class="fas fa-check-circle"></i> <i
-						class="fas fa-exclamation-circle"></i> <small>Error
-						message</small> <br> <br>
-				</div>
-
-				<input type="submit" value="Submit" class="btn" name="">
-
-			</form>
-
-			<br>
-			<button id="back">Back</button>
-		</center>
-	</div>
-
-	</div>
-
-	<!-------------------------------------- Property Page ----------------------------------------->
-	<div id="propertyPage">
-
-		<div class="container">
-			<div class="header"></div>
-			<center>
-				<h2>PROPERTY FORM</h2>
-				<form action="location" id="location">
-					<div class="form-control">
-						<label>Market Value</label> <input type="number" name=""
-							id="property" placeholder="$" autocomplete="off"> <i
-							class="fas fa-check-circle"></i> <i
-							class="fas fa-exclamation-circle"></i> <small>Error
-							message</small>
-					</div>
-					<br>
-
-					<div class="form-control">
-						<label>Build Year</label> <input type="text" name=""
-							id="buildyear" placeholder="Square Feet" autocomplete="off">
-
-						<i class="fas fa-check-circle"></i> <i
-							class="fas fa-exclamation-circle"></i> <small>Error
-							message</small>
-					</div>
-					<br>
-
-					<div class="form-control">
-						<label>Dwelling Style</label> <select>
-							<option>Choose Options</option>
-							<option>1 Story</option>
-							<option>1.5 Story</option>
-							<option>2</option>
-							<option>2.5 Story</option>
-							<option>3</option>
-						</select> <i class="fas fa-check-circle"></i> <i
-							class="fas fa-exclamation-circle"></i> <small>Error
-							message</small>
-					</div>
-					<br>
-
-					<div class="form-control">
-						<label>Roof Material</label> <select>
-							<option>Choose Options</option>
-							<option>Concrete</option>
-							<option>Clay</option>
-							<option>Rubber</option>
-							<option>Steel</option>
-							<option>Tin</option>
-							<option>Wood</option>
-						</select> <i class="fas fa-check-circle"></i> <i
-							class="fas fa-exclamation-circle"></i> <small>Error
-							message</small>
-					</div>
-					<br>
-
-					<div class="form-control">
-						<label>Type of Garage</label> <select>
-							<option>Choose Options</option>
-							<option>Attached</option>
-							<option>Detached</option>
-							<option>Basement</option>
-							<option>Built-in</option>
-							<option>None</option>
-						</select> <i class="fas fa-check-circle"></i> <i
-							class="fas fa-exclamation-circle"></i> <small>Error
-							message</small>
-					</div>
-					<br>
-
-					<div class="form-control">
-						<label>Numeber of Full Baths</label> <select>
-							<option>Choose Options</option>
-							<option>1</option>
-							<option>2</option>
-							<option>3</option>
-						</select> <i class="fas fa-check-circle"></i> <i
-							class="fas fa-exclamation-circle"></i> <small>Error
-							message</small>
-					</div>
-					<br>
-
-					<div class="form-control">
-						<label>Number of Half Baths</label> <select>
-							<option>Choose Options</option>
-							<option>1</option>
-							<option>2</option>
-							<option>3</option>
-						</select> <i class="fas fa-check-circle"></i> <i
-							class="fas fa-exclamation-circle"></i> <small>Error
-							message</small>
-					</div>
-					<br>
-
-					<div class="form-control">
-						<label>Do you have Swimming Pool</label> <input type="radio"
-							id="yes" name="yes" value="yes"> <label>Yes</label> <input
-							type="radio" id="no" name="no" value="no"> <label>No</label>
-						<i class="fas fa-check-circle"></i> <i
-							class="fas fa-exclamation-circle"></i> <small>Error
-							message</small>
-					</div>
-					<br> <input type="submit" value="Submit" class="btn" name="">
-
-				</form>
-			</center>
-		</div>
-	</div>
-
-
-
-
-
-
-
-
-
-
-	<!--------------------------------- Location page --------------------------------------------------->
-	<div id="locationPage">
-		<div class="container">
-			<div class="header">
-				<h2>LOCATION FORM</h2>
+				<ul>
+					<li><a href=""><i class="fab fa-facebook-f"></i></a></li>
+					<li><a href=""><i class="fab fa-twitter"></i></a></li>
+					<li><a href=""><i class="fas fa-power-off"></i></a></li>
+				</ul>
 			</div>
-			<center>
-				<form action="location" id="location">
-					<div class="form-control">
-						<label>Location Id</label> <input type="number" name=""
-							id="locationid" placeholder="Enter your Location id"
-							autocomplete="off"> <i class="fas fa-check-circle"></i> <i
-							class="fas fa-exclamation-circle"></i> <small>Error
-							message</small>
-					</div>
-
-					<div class="form-control">
-
-						<label>Residence Type</label> <select>
-							<option>Choose Options</option>
-							<option>Single-Family Home</option>
-							<option>Condo</option>
-							<option>Townhouse</option>
-							<option>Row House</option>
-							<option>Duplex</option>
-							<option>Apartment</option>
-						</select> <i class="fas fa-check-circle"></i> <i
-							class="fas fa-exclamation-circle"></i> <small>Error
-							message</small>
-					</div>
-
-					<div class="form-control">
-						<label>Address Line-1</label> <input type="text" name=""
-							id="address1" placeholder="Enter your Address Line 1"
-							autocomplete="off"> <i class="fas fa-check-circle"></i> <i
-							class="fas fa-exclamation-circle"></i> <small>Error
-							message</small>
-					</div>
-
-
-					<div class="form-control">
-						<label>Address Line-2</label> <input type="text" name=""
-							id="address2" placeholder="Enter your Address Line 2"
-							autocomplete="off"> <i class="fas fa-check-circle"></i> <i
-							class="fas fa-exclamation-circle"></i> <small>Error
-							message</small>
-					</div>
-
-					<div class="form-control">
-						<label>City</label> <input type="text" name="" id="address2"
-							placeholder="Enter your City" autocomplete="off"> <i
-							class="fas fa-check-circle"></i> <i
-							class="fas fa-exclamation-circle"></i> <small>Error
-							message</small>
-					</div>
-
-					<div class="form-control">
-						<label>State</label> <input type="text" name="" id="address2"
-							placeholder="Enter your State" autocomplete="off"> <i
-							class="fas fa-check-circle"></i> <i
-							class="fas fa-exclamation-circle"></i> <small>Error
-							message</small>
-					</div>
-
-					<div class="form-control">
-						<label>Zip Code</label> <input type="text" name="" id="address2"
-							placeholder="Enter your City" autocomplete="off"> <i
-							class="fas fa-check-circle"></i> <i
-							class="fas fa-exclamation-circle"></i> <small>Error
-							message</small>
-					</div>
-
-					<div class="form-control">
-						<label>Residence User</label> <select>
-							<option>Choose Options</option>
-							<option>Primary</option>
-							<option>Secondary</option>
-							<option>Rental Property</option>
-						</select> <i class="fas fa-check-circle"></i> <i
-							class="fas fa-exclamation-circle"></i> <small>Error
-							message</small>
-					</div>
-					<input type="submit" value="Submit" class="btn" name="">
-
-				</form>
-				<br>
-				<button id="back">Back</button>
-			</center>
-
 		</div>
+		<!--header menu end-->
+		<!--main container start-->
+		<div class="main-container">
+			<div class="content">
+				<h1>Hi welcome user</h1>
+				<div id="carbon-block" style="margin: 30px auto"></div>
+				<div style="margin: 30px auto"></div>
+				<p class="lead">well-suited for dashboards, admin panels, and
+					documentation websites.</p>
+			</div>
+		</div>
+		<!--main container end-->
 	</div>
+	<!--wrapper end-->
+	<script type="text/javascript">
 
-	<script>
-		$(document).ready(function() {
-			$('#owner').hide();
-			$('#locationPage').hide();
-			$('#propertyPage').hide();
-			$('#dashboard').show();
-		});
 
-		$('#ownerBTN').click(function() {
-			$('#dashboard').hide();
-			$('#owner').show();
-			$('#locationPage').hide();
-			$('#propertyPage').hide();
-		});
-
-		$('#location').click(function() {
-			$('#dashboard').hide();
-			$('#owner').hide();
-			$('#locationPage').show();
-			$('#propertyPage').hide();
-		});
-		
-		$('#location').click(function() {
-			$('#dashboard').hide();
-			$('#owner').hide();
-			$('#locationPage').show();
-			$('#propertyPage').hide();
-		});
-
-		$('#back').click(function() {
-			$('#dashboard').hide();
-			$('#owner').hide();
-			$('#locationPage').show();
-			$('#propertyPage').hide();
-		});
-	</script>
+</script>
 </body>
 </html>
