@@ -1,84 +1,45 @@
 package com.root.testing;
 
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import com.root.bean.PolicyBean;
+import com.root.bean.QuoteBean;
+import com.root.bean.UserBean;
+import com.root.dao.PolicyDAOImpl;
 
-import com.root.entity.HomeOwnerEntity;
-import com.root.entity.UserEntity;
+			public class Demo extends PolicyDAOImpl {
+				public static void main(String args[]) throws ParseException, ClassNotFoundException, SQLException		{
+	/*				
+	LocalDate dateBefore = LocalDate.of(2017, Month.MAY, 24);
+	//29-July-2017, change this to your desired End Date
+	LocalDate dateAfter = LocalDate.of(2017, Month.JULY, 29);
+	long noOfDaysBetween = ChronoUnit.DAYS.between(dateBefore, dateAfter);
+	System.out.println(noOfDaysBetween);}
+	*/	
+					
+	String sDate1="31/12/2017";
+	Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);	
+	sDate1="31/12/2020";
+	Date date2 =new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);	
 
-public class Demo {
-
-	  public static void main(String[] args) throws ClassNotFoundException, SQLException {
-		  
-		/*
-		 * UserEntity user = new UserEntity();
-		 * 
-		 * user.setUser_id(456); user.setUser_name("mrry12"); user.setRole("admin");
-		 * user.setPassword("rehan@123"); user.setConfirmPassword("rehan@123");
-		 * 
-		 * LocationBean l = new LocationBean(); PropertyBean p = new PropertyBean();
-		 * 
-		 * l.setAddress_line_1("atttt"); l.setLocation_id(12);
-		 * 
-		 * p.setProperty_id(13); p.setHalf_baths(12);
-		 * 
-		 * 
-		 * 
-		 * LocationServiceImpl service = new LocationServiceImpl(); service.
-		 * addLocationWithProperty(l,p,user);
-		 */
-		  
-		  EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("unit1");
-			EntityManager entityManager = entityManagerFactory.createEntityManager();
-			
-		
-		 
-			
-			HomeOwnerEntity homeOwnerBean = new HomeOwnerEntity();
-			
-			UserEntity userBean = new UserEntity();
-			
-			userBean.setUser_id(10012);
-			userBean.setUser_name("rehnse");
-			userBean.setPassword("reha@121");
-			userBean.setRole("admin1");
-			
-			
-			homeOwnerBean.setOwnerId(101);
-			homeOwnerBean.setFname("rajat");
-			homeOwnerBean.setLname("Goyal");
-			homeOwnerBean.setDob(new Date());
-			homeOwnerBean.setRetired("Yes");
-			homeOwnerBean.setSocialSocietyNumber(1001);
-			homeOwnerBean.setEmail("rajat2001@gmail.com");
-			
-			homeOwnerBean.setUserEntity(userBean);
-			
-			
-			
-			entityManager.getTransaction().begin();
-
-			entityManager.persist(userBean);
-			
-			System.out.println(userBean);
-			System.out.println(homeOwnerBean);
-			
-			entityManager.persist(homeOwnerBean);
-			entityManager.getTransaction().commit();
-			
-		/*
-		 * userBean.setUsername("rohini"); userBean.setRole("user");
-		 * userBean.setPassword("rohini123"); userBean.setCpassword("rohini123");
-		 */
-		/*
-		 * HomeOwnerService homeOwnerService = new HomeOwnerServiceImpl();
-		 * 
-		 * homeOwnerService.insertHomeOwner(homeOwnerBean, userBean);
-		 */
-			
-	}
-}
+			    PolicyBean  p=new PolicyBean();
+			    
+				p.setEffectiveDate(date1);
+				p.setEndDate(date2);
+				p.setPolicyStatus("Active");
+				p.setPolicyTerm(40);
+				
+				UserBean us=new UserBean();
+				us.setuserid(101);
+				QuoteBean qb=new QuoteBean();
+				qb.setQuote_id(0);
+				
+				PolicyDAOImpl ser=new PolicyDAOImpl();
+				ser.buyPolicy(p,us,qb);
+				
+				
+				
+				}	}

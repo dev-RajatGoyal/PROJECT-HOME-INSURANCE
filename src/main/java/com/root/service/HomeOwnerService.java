@@ -4,5 +4,5 @@ import com.root.bean.HomeOwnerBean;
 import com.root.bean.UserBean;
 
 public interface HomeOwnerService {
-	void insertHomeOwner(HomeOwnerBean homeOwner, UserBean user);
+	int insertHomeOwner(HomeOwnerBean homeOwner);
 }

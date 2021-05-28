@@ -8,4 +8,5 @@ public interface UserService {
 
 	String insertUser(UserBean userBean)  throws ClassNotFoundException,SQLException;
 	UserBean viewUserByUserId(int userId)  throws ClassNotFoundException,SQLException;
+	UserBean updatePassword(UserBean userBean) throws ClassNotFoundException, SQLException;
 }

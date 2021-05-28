@@ -1,12 +1,11 @@
-
-/** No ©copyright issues **/
-/** But we will be happy to see you whenever you use our code(^_^) **/
-/** Designed by @BlackX-Lolipop **/
-/** Content available by @BlackX-732 **/
-/** Content available @ https://github.com/BlackX-732/AwesomeMenu **/
-/** Version 21.2.7 **/
-/** https://facebook.com/BlackX-732 **/
-/** https://twitter.com/ **/
+/* No Â©copyright issues */
+/* But we will be happy to see you whenever you use our code(^_^) */
+/* Designed by @BlackX-Lolipop */
+/* Content available by @BlackX-732 */
+/* Content available @ https://github.com/BlackX-732/AwesomeMenu */
+/* Version 21.2.7 */
+/* https://facebook.com/BlackX-732 */
+/* https://twitter.com/ */
 
 
 
@@ -25,13 +24,13 @@ body{
     background: #fafafa;
 }
 
-        /**Header design start**/
+        /Header design start/
 
 .wrapper .header{
 
     background: #4B5563;
     position: fixed;
-    width: calc(100% - 0%);/*If we increase .sidebar width from 250px to greater it will be improve automatically*/
+    width: calc(100% - 0%);/If we increase .sidebar width from 250px to greater it will be improve automatically/
     height: 50px;
     display: flex;
     top: 0;
@@ -98,8 +97,8 @@ body{
     background: #4CCEE8;
     color: #fff;
 }
-        /**Header design end**/
-        /**Sidebar design start**/
+        /Header design end/
+        /Sidebar design start/
 
 .wrapper .sidebar{
     z-index: 1; /* indexing sidebar @ z direction */
@@ -163,20 +162,23 @@ body{
     transition-property: background,max-height;
 }
 
-.wrapper .sidebar .sidebar-menu .item .sub-menu a{
-    display: block;
+.wrapper .sidebar .sidebar-menu .item .sub-menu button{
+    display: inline;
     position: relative;
     color: #fff;
-    white-space: nowrap;
+    white-space: wrap;
     font-size: 15px;
     padding: 20px;
     border-bottom: 1px solid #BFC5E9;
     transition: 0.3s;
     transition-property: background;
+    width: 100%;
+    background-color: #3498DB;
 }
 
-.wrapper .sidebar .sidebar-menu .item .sub-menu a:hover{
+.wrapper .sidebar .sidebar-menu .item .sub-menu button:hover{
     background: #55B1F0;
+    color: blue;
 }
 
 .wrapper .sidebar .sidebar-menu .item .sub-menu i{
@@ -188,7 +190,7 @@ body{
     max-height: 500px;
 }
 
-        /**Sidebar design end**/
+        /Sidebar design end/
         /* Main-container design start */
 .main-container{
     width: calc(100%-250px); /* .sidebar width is -> 250px */
@@ -200,8 +202,8 @@ body{
     transition: 0.3s;
 }
         /* Main-container design start */
-        /**Collapse design start**/
-        /**.Collapse class is created by JavaScript**/
+        /Collapse design start/
+        /.Collapse class is created by JavaScript/
 .collapse .sidebar{
     width: 70px;
 }
@@ -214,13 +216,15 @@ body{
 
 }
 
+
 .collapse .sidebar .sidebar-menu .item .menu-btn{
     font-size: 23px;
 }
 
 .collapse .sidebar .sidebar-menu .item .sub-menu{
     font-size: 18px;
-    padding-left: 3px;
+    padding-left: 5px;
+    
 }
 .collapse .header .header-menu .sidebar-btn{
     margin-left: 0;
@@ -232,7 +236,3 @@ body{
     width: (100%-70px); /* .header height is -> 70px */
     margin-left: 70px;
 }
-
-        /**Collapse design end**/
-
-

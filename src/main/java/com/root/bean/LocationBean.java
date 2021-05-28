@@ -11,7 +11,24 @@ public class LocationBean {
 	private String location_state ;
 	private String zip_code ;
 	private String residence_use ;
-
+	
+	
+	private UserBean user;
+	private PropertyBean property;
+	
+	
+	public UserBean getUser() {
+		return user;
+	}
+	public void setUser(UserBean user) {
+		this.user = user;
+	}
+	public PropertyBean getProperty() {
+		return property;
+	}
+	public void setProperty(PropertyBean property) {
+		this.property = property;
+	}
 	public int getLocation_id() {
 		return location_id;
 	}

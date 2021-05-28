@@ -22,6 +22,7 @@ public class UserEntity {
 	private String role;
 	private String password;
 	private String confirmPassword;
+	private String email;
 	
 	public UserEntity() {
 		
@@ -65,11 +66,17 @@ public class UserEntity {
 	public void setRole(String role) {
 		this.role = role;
 	}
-
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
 	@Override
 	public String toString() {
-		return "User [user_id=" + user_id + ", user_name=" + user_name + ", password=" + password + ", role=" + role
-				+ "]";
+		return "UserEntity [user_id=" + user_id + ", user_name=" + user_name + ", role=" + role + ", password="
+				+ password + ", confirmPassword=" + confirmPassword + ", email=" + email + "]";
 	}
 
 }

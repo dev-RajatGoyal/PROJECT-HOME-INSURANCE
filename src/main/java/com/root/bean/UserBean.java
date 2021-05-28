@@ -7,6 +7,7 @@ public class UserBean {
 	private String role;
 	private String password;
 	private String cpassword;
+	private String email;
 	
 	public UserBean() {
 		// TODO Auto-generated constructor stub
@@ -52,12 +53,28 @@ public class UserBean {
 		this.cpassword = cpassword;
 	}
 
+	
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	@Override
 	public String toString() {
 		return "UserBean [userid=" + userid + ", username=" + username + ", role=" + role + ", password=" + password
-				+ ", cpassword=" + cpassword + "]";
+				+ ", cpassword=" + cpassword + ", email=" + email + "]";
 	}
 
-	
 	
 }

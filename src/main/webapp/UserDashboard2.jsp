@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,319 +10,325 @@
 <script src="https://code.jquery.com/jquery-1.10.2.js"
 	type="text/javascript"></script>
 </head>
-<body>
 
-	<div id="dashboard">
-		<h1>
-			Hello <br> ${user.username} <br> Welcome to user dashboard
+  
 
-		</h1>
-		<button id="ownerBTN">Add HomeOwner details</button>
-		<br>
-		<button id="location">Add Location details</button>
-	</div>
+ <body>
+ 
+    <button id="locationbtn" value="location">location</button>
+    <button id="HomeOwnerbtn" value="HomeOwner">home Owner</button>
+    
+    
+    
+    
+<div align="center" id="page">
 
-
-
-	<!--------------------------------- Home Owner Page --------------------------------------->
-	<div id="owner">
-		<div class="container">
-			<div class="header">
-				<h2>Owner Info FORM</h2>
-			</div>
-			<center>
-				<form action="fname" id="fname">
-					<div class="form-control">
-						<label>First Name</label> <input type="text" name="" id="fname"
-							placeholder="Enter your First Name" autocomplete="off"> <i
-							class="fas fa-check-circle"></i> <i
-							class="fas fa-exclamation-circle"></i> <small>Error
-							message</small>
-					</div>
-		</div>
-		<center>
-			<form action="lname" id="lname">
-				<div class="form-control">
-					<label>Last Name</label> <input type="text" name="" id="lname"
-						placeholder="Enter your Last Name" autocomplete="off"> <i
-						class="fas fa-check-circle"></i> <i
-						class="fas fa-exclamation-circle"></i> <small>Error
-						message</small> <br> <br>
-				</div>
-
-				<div class="form-control">
-					<label>Enter Date of Birth <label> <input
-							type="date" name=? id="dob"> <i
-							class="fas fa-check-circle"></i> <i
-							class="fas fa-exclamation-circle"></i> <small>Error
-								message</small> <br> <br>
-				</div>
-				<div class="form-control">
-
-					<label>Are you retired</label> <select>
-						<option>Choose Options</option>
-						<option>YES</option>
-						<option>NO</option>
-
-					</select> <i class="fas fa-check-circle"></i> <i
-						class="fas fa-exclamation-circle"></i> <small>Error
-						message</small> <br> <br>
-				</div>
-
-
-				<div class="form-control">
-					<label>Social Security number </label> <input type="number" name=""
-						id="SSN" placeholder="Enter your SSN" autocomplete="off">
-					<i class="fas fa-check-circle"></i> <i
-						class="fas fa-exclamation-circle"></i> <small>Error
-						message</small> <br> <br>
-				</div>
-
-				<div class="form-control">
-					<label>Email Address</label> <input type="email" name=? id=emailId
-						placeholder="Enter your EmailID " autocomplete="off"> <i
-						class="fas fa-check-circle"></i> <i
-						class="fas fa-exclamation-circle"></i> <small>Error
-						message</small> <br> <br>
-				</div>
-
-				<input type="submit" value="Submit" class="btn" name="">
-
-			</form>
-
-			<br>
-			<button id="back">Back</button>
-		</center>
-	</div>
-
-	</div>
-
-	<!-------------------------------------- Property Page ----------------------------------------->
-
-
-
-
-
-
-
-
-
-
-	<!--------------------------------- Location page --------------------------------------------------->
+	<form:form method="POST" modelAttribute="location" action="location">
 	
 	
-	<form action="location" id="location">
-	<div id="locationPage">
+	<! --------------- property page --------->
 
-	
-	   <center>
-			<br><br><br><br><h2>Location Page</h2>
-			<table  cellspacing="5px" cellpadding="5%" align="center">
+		<div id="propertyPage">
 
-		<tr>
-		<td><label>Location Id</label></td>
-		<td><input type="number" name="id" id="locationid" placeholder="Enter your Location id"></td>
-		</tr>
-			
-		<tr>
-		<td><label>Residence Type</label></td>
-		<td><select name="rt">
-		<option>Choose Options</option>
-		<option>Single-Family Home</option>
-		<option>Condo</option>
-		<option>Townhouse</option>
-		<option>Row House</option>
-		<option>Duplex</option>
-		<option>Apartment</option>
-		</select></td>
-		</tr>
+			<h2>Property Page</h2>
+			<table cellspacing="5px" cellpadding="5%" align="center">
 
-		<tr>
-		<td><label>Address Line-1</label></td>
-		<td><input type="text" name="a1" id="address1" placeholder="Enter your Address Line 1"><td>
-		<tr>
+				<tr>
+					<td><label>Property ID</label></td>
+					<td><form:input path="property.property_id" name="p_Id"
+							id="id" placeholder="Enter your Property ID" /></td>
+				</tr>
 
-		<tr>
-		<td><label>Address Line-2</label></td>
-		<td><input type="text" name="a2" id="address2" placeholder="Enter your Address Line 2"><td>
-		<tr>
+				<tr>
+					<td><label>Market Value</label></td>
+					<td><form:input path="property.market_value"  name="mv"
+							id="property" placeholder="$" /></td>
+				</tr>
 
-		<tr>
-		<td><label>City</label></td>
-		<td><input type="text" name="city" id="city" placeholder="Enter your City"></td>
-		</tr>
+				<tr>
+					<td><label>Build Year</label></td>
+					<td><form:input path="property.year_built" name="by"
+							id="buildyear" placeholder="Square Feet" /></td>
+				</tr>
+				<tr>
+					<td><label>square footage</label></td>
+					<td><form:input path="property.square_footage" name="sf"
+							id="buildyear" placeholder="Square Footage" /></td>
+				</tr>
+				<tr>
+					<td><label>Dwelling Style</label></td>
+					<td><form:select path="property.dwelling_type" name="ds">
 
-		<tr>
-		<td><label>State</label></td>
-		<td><input type="text" name="state" id="state" placeholder="Enter your State"></td>
-		</tr>
+							<form:option value="-1" label="--Select--" />
+							<form:option value="1_st" label="1 Story" />
+							<form:option value="1.5_st" label="1.5 Story" />
+							<form:option value="2_st" label="2" />
+							<form:option value="2.5_st" label="2.5 Story" />
+							<form:option value="3_st" label="3" />
 
-		<tr>
-		<td><label>Zip Code</label></td>
-		<td><input type="number" name="zip" id="zipcode" placeholder="Enter your ZIP Code"></td>
-		</tr>
 
-		<tr>
-		<td><label>Residence User</label></td>
-		<td><select name="r_user">
-		<option>Choose Options</option>
-		<option>Primary</option>
-		<option>Secondary</option>
-		<option>Rental Property</option>
-		</select></td>
-		</tr>
+						</form:select></td>
+				</tr>
 
-		
-		<tr>
-		<td><input type="button" value="Previous" name=""></td>
-		<td><input type="button" value="Next" name=""></td>
-	</tr>
-	</center>
+				<tr>
+					<td><label>Roof Material</label></td>
+					<td><form:select path="property.roof_material" name="rm">
+					
+					        <form:option value="-1" label="--Select--" />
+							<form:option value="Concrete" label="Concrete" />
+							<form:option value="Clay" label="Clay" />
+							<form:option value="Rubber" label="Rubber" />
+							<form:option value="Steel" label="Steel" />
+							<form:option value="Tin" label="Tin" />
+							<form:option value="Wood" label="Wood" />
+							
+					</form:select></td>
+				</tr>
+
+				<tr>
+					<td><label>Type of Garage</label></td>
+					<td><form:select path="property.garage_type" name="tg">
+					
+					        <form:option value="-1" label="--Select--" />
+							<form:option value="Attached" label="Attached" />
+							<form:option value="Detached" label="Detached" />
+							<form:option value="Basement" label="Basement" />
+							<form:option value="Built-in" label="Built-in" />
+							<form:option value="None" label="None" />
+					
+					</form:select></td>
+				</tr>
+
+				<tr>
+					<td><label>Numeber of Full Baths</label></td>
+					<td><form:select path="property.full_baths"  name="fb">
+							 <form:option value="-1" label="--Select--" />
+							<form:option value="1" label="1" />
+							<form:option value="2" label="2" />
+							<form:option value="3" label="3" />
+					</form:select></td>
+				</tr>
+
+				<tr>
+					<td><label>Numeber of Half Baths</label></td>
+					<td><form:select path="property.half_baths" name="hb">
+							<form:option value="-1" label="--Select--" />
+							<form:option value="1" label="1" />
+							<form:option value="2" label="2" />
+							<form:option value="3" label="3" />
+					</form:select></td>
+				</tr>
+
+		<%-- 		<tr>
+					<td><label>Do you have Swimming Pool</label></td>
+					<td><label>Yes</label> <form:input path="pool" type="radio" id="yes" name="btn"
+						value="yes"/> <label>No</label> <form:input path="pool" type="radio" id="no"
+						name="btn" value="no"/></td>
+				</tr> --%>
+
 				
-				</div>	
-					
-					
-					
-					
-					
-					
-<! -------------------------     ------------------------------------------>
-
-	<div class="propertyPage">
-			<center>
-			<br><br><br><br><h2>Property Page</h2>
-			<table  cellspacing="5px" cellpadding="5%" align="center">
-
-		<tr>
-		<td><label>Property ID</label> </td>
-		<td><input type="number" name="p_Id" id="id" placeholder="Enter your Property ID"></td>
-		</tr>
+			</table>
 			
-		<tr>
-		<td><label>Market Value</label> </td>
-		<td><input type="number" name="mv" id="property" placeholder="$"></td>
-		</tr>
+			<input type="button" value="next" id="next"> 
 
-		<tr>
-		<td><label>Build Year</label> </td>
-		<td><input type="text" name="by" id="buildyear" placeholder="Square Feet"><td>
-		<tr>
+		</div>
 
-		<tr>
-		<td><label>Dwelling Style</label></td>
-		<td>
-		<select name="ds">
-		<option>Choose Options</option>
-		<option>1 Story</option>
-		<option>1.5 Story</option>
-		<option>2</option>
-		<option>2.5 Story</option>
-		<option>3</option>
-		</select></td>
-		</tr>
 
-		<tr>
-		<td><label>Roof Material</label></td>
-		<td><select name="rm">
-		<option>Choose Options</option>
-		<option>Concrete</option>
-		<option>Clay</option>
-		<option>Rubber</option>
-		<option>Steel</option>
-		<option>Tin</option>
-		<option>Wood</option>
-		</select></td>
-		</tr>
 
-		<tr>
-		<td><label>Type of Garage</label></td>
-		<td><select name="tg">
-		<option>Choose Options</option>
-		<option>Attached</option>
-		<option>Detached</option>
-		<option>Basement</option>
-		<option>Built-in</option>
-		<option>None</option>
-		</select></td>
-		</tr>
 
-		<tr>
-		<td><label>Numeber of Full Baths</label></td>
-		<td><select name="fb">
-		<option>Choose Options</option>
-		<option>1</option>
-		<option>2</option>
-		<option>3</option>
-		</select></td>
-		</tr>
 
-		<tr>
-		<td><label>Numeber of Half Baths</label></td>
-		<td><select name="hb">
-		<option>Choose Options</option>
-		<option>1</option>
-		<option>2</option>
-		<option>3</option>
-		</select></td>
-		</tr>
+   <! -----------------Location page -------------------->
+   
+   
+   	<div id="locationPage">
 
-		<tr>
-		<td><label>Do you have Swimming Pool</label></td>
-		<td><label>Yes</label>
-		<input type="radio" id="yes" name="btn" value="yes">
-		<label>No</label>
-		<input type="radio" id="no" name="btn" value="no"></td>
-		</tr>
-		
-		<tr>
-	</tr>
-	</center>
+				<h2>Location Page</h2>
+				<table cellspacing="5px" cellpadding="5%" align="center">
+
+					<tr>
+						<td><label>Location Id</label></td>
+						<td><form:input path="location_id"  name="id" id="locationid"
+							placeholder="Enter your Location id"/></td>
+					</tr>
+
+
+
+                  <tr>
+					<td><label>Residence Type</label></td>
+					<td><form:select path="residence_type" name="ds">
+
+							<form:option value="-1" label="--Select--" />
+							<form:option value="Home" label="Single-Family Home" />
+							<form:option value="Condo" label="Condo" />
+							<form:option value="Townhouse" label="Townhouse" />
+							<form:option value="House" label="Row House" />
+							<form:option value="Duplex" label="Duplex" />
+							<form:option value="Apartment" label="Apartment" />
+
+						</form:select></td>
+				</tr>
+
+					<tr>
+						<td><label>Address Line-1</label></td>
+						<td><form:input path="address_line_1"  name="a1" id="address1"
+							placeholder="Enter your Address Line 1"/>
+						</td>
+					</tr>
+					<tr>
+						<td><label>Address Line-2</label></td>
+						<td><form:input path="address_line_2" name="a2" id="address2"
+							placeholder="Enter your Address Line 2"/>
+						</td>
+					</tr>
+					<tr>
+						<td><label>City</label></td>
+						<td><form:input path="city"  name="city" id="city"
+							placeholder="Enter your City"/></td>
+					</tr>
+
+					<tr>
+						<td><label>State</label></td>
+						<td><form:input path="location_state"  name="state" id="state"
+							placeholder="Enter your State"/></td>
+					</tr>
+
+					<tr>
+						<td><label>Zip Code</label></td>
+						<td><form:input path="zip_code" name="zip" id="zipcode"
+							placeholder="Enter your ZIP Code"/></td>
+					</tr>
+
+					<tr>
+					   <td><label>Residence Use</label></td>
+					   <td><form:select path="residence_use" name="r_user">
+
+							<form:option value="-1" label="--Select--" />
+							<form:option value="Home" label="Primary" />
+							<form:option value="Condo" label="Secondary" />
+							<form:option value="Townhouse" label="Rental Property" />
+
+						</form:select></td>
+				
+					</tr>
+
+
+					<tr>
+						
+						<td><input type="button" value="previous" id="previous"></td>
+						<td><input	type="submit" value="Submit" class="btn" name=""></td>
+					</tr>
+					</table>
+			
+	</form:form>
+	
+	
 	</div>
-					
-					
-					
-					<input type="submit" value="Submit" class="btn" name="">
+	
+	
+	
+	
+	
+	
+	
+	
+	 <div id="homeOwnerPage">
+	 
+	  <! --------------------------   Home Owner Entity ------------------------>
+ 
+	  <form:form method="POST" modelAttribute="home" action="homeowner" >
 
-				</form>
-		
+		<center>
+			<br> <br> <br> <br>
+			<h2>Home Owner Page</h2>
+			<table cellspacing="5px" cellpadding="5%" align="center">
+				<tr>
+					<td><label>Owner ID</label></td>
+					<td><form:input path="ownerId" type="number" name="o_Id"
+							id="id" placeholder="Enter your ID" /></td>
+				</tr>
 
+				<tr>
+					<td><label>First Name</label></td>
+					<td><form:input path="fname" type="text" name="fn" id="fname"
+							placeholder="Enter your First Name" /></td>
+				</tr>
 
+				<tr>
+					<td><label>Last Name</label></td>
+					<td><form:input path="lname" type="text" name="ln" id="lname"
+							placeholder="Enter your Last Name" /></td>
+				</tr>
 
-	<script>
+				<%-- <tr>
+					<td><label>Enter Date of Birth</label></td>
+					<td><form:input path="dob" type="date" name="dob" id="dob" /></td>
+				</tr>  --%>
+
+				<tr>
+					<td><label>Are you retired</label></td>
+					<td><form:select path="retired" name="retired">
+						<form:option value="Yes" label="Yes"/>
+						<form:option value="No" label="No"/>
+						</form:select></td>
+				</tr>
+
+				<tr>
+					<td><label>Social Security number </label></td>
+					<td><form:input path="socialSocietyNumber" type="number"
+							name="s_no" id="SSN"
+							placeholder="Enter your Social Security Number" /></td>
+				</tr>
+
+				 <tr>
+					<td><label>Email Address</label></td>
+					<td><form:input path="email" type="email" name="owner_email" id="emailId"
+						placeholder="Enter your EmailID" /></td>
+				</tr> 
+
+				<tr>
+					<td><input type="submit" value="Submit" name=""></td>
+				</tr>
+			</table>
+		</center>
+
+	</form:form>
+	  </div>
+	  
+	  
+	  
+	  <script>
 		$(document).ready(function() {
-			$('#owner').hide();
-			$('#locationPage').hide();
-			$('#propertyPage').hide();
-			$('#dashboard').show();
-		});
-
-		$('#ownerBTN').click(function() {
-			$('#dashboard').hide();
-			$('#owner').show();
+			$('#locationbtn').show();
+			$('#HomeOwnerbtn').show();
+			$('#homeOwnerPage').hide();
 			$('#locationPage').hide();
 			$('#propertyPage').hide();
 		});
 
-		$('#location').click(function() {
-			$('#dashboard').hide();
-			$('#owner').hide();
-			$('#locationPage').show();
-			$('#propertyPage').hide();
+		$('#locationbtn').click(function() {
+			$('#propertyPage').show();
+			$('#locationPage').hide();
+			$('#homeOwnerPage').hide();
 		});
 		
-		$('#location').click(function() {
-			$('#dashboard').hide();
-			$('#owner').hide();
+		
+		$('#next').click(function() {
 			$('#locationPage').show();
 			$('#propertyPage').hide();
+			$('#homeOwnerPage').hide();
 		});
+		
+		
+		$('#HomeOwnerbtn').click(function() {
+			$('#locationPage').hide();
+			$('#propertyPage').hide();
+			$('#homeOwnerPage').show();
+		});
+		
+		</script>
+	  
 
-		$('#back').click(function() {
-			$('#dashboard').hide();
-			$('#owner').hide();
-			$('#locationPage').show();
-			$('#propertyPage').hide();
-		});
-	</script>
-</body>
+ 
+ </body>
+  
 </html>

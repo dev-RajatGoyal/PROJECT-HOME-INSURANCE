@@ -10,17 +10,23 @@ public class UserServiceImpl implements UserService
 {
 
 	UserDAO userDao = new UserDAOImpl();
-	
+
 	@Override
 	public String insertUser(UserBean userBean) throws ClassNotFoundException, SQLException {
-		
+
 		return userDao.insertUser(userBean);
 	}
 
 	@Override
 	public UserBean viewUserByUserId(int userId) throws ClassNotFoundException, SQLException {
-		
+
 		return userDao.viewUserByUserId(userId);
+	}
+
+	@Override
+	public UserBean updatePassword(UserBean userBean) throws ClassNotFoundException, SQLException {
+
+		return userDao.updatePassword(userBean);
 	}
 
 }

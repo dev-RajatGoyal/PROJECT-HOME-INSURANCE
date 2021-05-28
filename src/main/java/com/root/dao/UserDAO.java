@@ -9,5 +9,5 @@ public interface UserDAO {
 
 	String insertUser(UserBean userBean)  throws ClassNotFoundException,SQLException;
 	UserBean viewUserByUserId(int userId)  throws ClassNotFoundException,SQLException;
-	
+	UserBean updatePassword(UserBean up) throws ClassNotFoundException,SQLException;
 }

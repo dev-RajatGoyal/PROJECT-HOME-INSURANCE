@@ -37,7 +37,7 @@
            		    	<input type="password" class="input" name="password">
             	   </div>
             	</div>
-            	<a href="#">Forgot Password?</a>
+            	<a href="update">Forgot Password?</a>
             	<input type="submit" class="btn" value="Login">
 	<!-- <input type="submit" class="btn" value="Register" onClick="register"> -->
 	<a href="register">Click here to register</a>
