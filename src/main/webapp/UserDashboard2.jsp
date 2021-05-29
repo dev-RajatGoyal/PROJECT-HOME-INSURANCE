@@ -18,7 +18,7 @@
     <button id="locationbtn" value="location">location</button>
     <button id="HomeOwnerbtn" value="HomeOwner">home Owner</button>
     
-    
+    <a href="logout">logout</a>
     
     
 <div align="center" id="page">

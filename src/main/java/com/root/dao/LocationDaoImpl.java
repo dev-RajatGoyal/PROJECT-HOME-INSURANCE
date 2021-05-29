@@ -172,7 +172,8 @@ public class LocationDaoImpl implements LocationDao {
 			/**
 			 * convert LocationEntity object to LocationBean
 			 */
-		    UserEntity user = entity.getUserEntity();
+			System.out.println("*************"+entity+" entity from locationDAO");
+		    UserEntity user =entity.getUserEntity();
 		    PropertyEntity property = entity.getPropertyEntity();
 		
 		    PropertyBean propertyBean =converter.convertPropertyEntityToBean(property);

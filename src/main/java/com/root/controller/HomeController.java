@@ -1,6 +1,11 @@
 package com.root.controller;
 
+import java.io.IOException;
 import java.sql.SQLException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,21 +36,20 @@ public class HomeController {
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public ModelAndView showHomePage()
-	{
+	{	
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("home");
 		return modelAndView;
 	}
 	
-	/*
-	 * @RequestMapping(value="/", method = RequestMethod.GET) public String
-	 * showView() { return "home"; }
-	 */
 
+	
 	@RequestMapping(value="/userdashboard", method = RequestMethod.POST)
-	public ModelAndView showUserDashboard(@RequestParam int userId, @RequestParam String password, Model model) throws ClassNotFoundException, SQLException 
+	public ModelAndView showUserDashboard(HttpServletRequest request,HttpServletResponse response ,@RequestParam int userId, @RequestParam String password, Model model) throws ClassNotFoundException, SQLException, IOException 
 	{
 		
+		HttpSession session = request.getSession();
+			
 		LocationBean location = new LocationBean();
 		model.addAttribute("location",location);
 		
@@ -56,9 +60,13 @@ public class HomeController {
      	UserBean user = new UserBean();
 		user = userService.viewUserByUserId(userId);
 		model.addAttribute("user",user);
+		
+		session.setAttribute("userId", user.getuserid());
+		
 		if(user.getuserid()==userId && user.getPassword().equals(password))
 		{
-			modelAndView.setViewName("UserDashboard2");
+			//response.sendRedirect("UserDashboard2");
+			modelAndView.setViewName("UserDashboard2");			
 		}
 		return modelAndView;
 	}
@@ -73,7 +81,9 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/registersuccess", method = RequestMethod.POST)
-	public ModelAndView RegisterSuccessful(UserBean user) throws ClassNotFoundException, SQLException {
+	public ModelAndView RegisterSuccessful(UserBean user, Model model) throws ClassNotFoundException, SQLException {
+		
+		model.addAttribute("username",user.getUsername());
 		ModelAndView modelAndView = new ModelAndView();
 		System.out.println("HomeController.RegisterSuccessful()");
 		System.out.println(user.getCpassword() + "===" + user.getPassword());
@@ -116,9 +126,12 @@ public class HomeController {
 	 */
 	
 	@RequestMapping(value="/homeowner" , method = RequestMethod.POST)
-	public ModelAndView LocationPage(@ModelAttribute("home") HomeOwnerBean bean , Model model) 
+	public ModelAndView LocationPage(HttpServletRequest request,HttpServletResponse response,@ModelAttribute("home") HomeOwnerBean bean , Model model) 
 	{
-
+		HttpSession session = request.getSession();
+		int userId = (Integer)session.getAttribute("userId");
+		System.out.println("inside homeOwner handler methood "+userId+" logged in");
+	
 		HomeownerDAO dao = new HomeownerDAOImpl();
 		
 		LocationBean location = new LocationBean();
@@ -128,7 +141,7 @@ public class HomeController {
 		model.addAttribute("home",home);
 		
 		UserBean user = new UserBean();
-	    user.setuserid(1001);
+	    user.setuserid(userId);
 		bean.setUser(user);
 		
 		dao.insertHomeOwner(bean);
@@ -140,15 +153,18 @@ public class HomeController {
 	
 	
 	@RequestMapping(value="/location" , method = RequestMethod.POST)
-	public ModelAndView submitPropertyAndLocation(@ModelAttribute("location") LocationBean location, Model model) throws ClassNotFoundException, SQLException
+	public ModelAndView submitPropertyAndLocation(HttpServletRequest request,HttpServletResponse response,@ModelAttribute("location") LocationBean location, Model model) throws ClassNotFoundException, SQLException
 	{
+		HttpSession session = request.getSession();
+		int userId = (Integer)session.getAttribute("userId");
+		System.out.println("inside submitPropertyAndLocation handler methood "+userId+" logged in");
 		
 		PropertyBean property = location.getProperty();
 		UserBean user = location.getUser();
 		
-		UserBean userBean = new UserBean();
-		userBean.setuserid(1002);
-		
+		UserBean userBean = userService.viewUserByUserId(userId);
+		//userBean.setuserid(userId);
+		location.setUser(userBean);
 		
 		LocationService service = new LocationServiceImpl();
 		service.addLocationWithProperty(location, property, userBean);
@@ -169,13 +185,6 @@ public class HomeController {
 				
 	}
 	
-	@RequestMapping(value="/")
-	public ModelAndView addLocation()
-	{
-		return null;
-		
-	}
-	
 	
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	public ModelAndView updatePassword() {
@@ -194,6 +203,19 @@ public class HomeController {
 			modelAndView.setViewName("updateSuccess");
 		else
 			modelAndView.setViewName("updateFail");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="/logout")
+	public ModelAndView logout(HttpServletRequest request,HttpServletResponse response ) throws IOException
+	{
+		ModelAndView modelAndView = new ModelAndView();
+		HttpSession session = request.getSession();
+		
+		session.removeAttribute("userId");
+		modelAndView.setViewName("home");
+		//response.sendRedirect("home");
+		
 		return modelAndView;
 	}
 }
