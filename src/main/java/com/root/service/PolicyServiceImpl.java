@@ -11,10 +11,16 @@ import com.root.entity.UserEntity;
 
 public class PolicyServiceImpl implements PolicyService {
 
-	PolicyDAO pldao=new  PolicyDAOImpl();
+	PolicyDAO policDao = new  PolicyDAOImpl();
 
 	public void buyPolicy(PolicyBean policyBean, UserBean userBean, QuoteBean quoteBean) throws ClassNotFoundException, SQLException {
-		pldao.buyPolicy(policyBean,userBean,quoteBean);
+		policDao.buyPolicy(policyBean,userBean,quoteBean);
+	}
+
+	@Override
+	public PolicyBean viewPolicy(int policyId) throws ClassNotFoundException, SQLException {
+		
+		return policDao.viewPolicy(policyId);
 	}
 }
 

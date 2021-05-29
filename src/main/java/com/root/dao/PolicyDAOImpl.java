@@ -13,6 +13,7 @@ import com.root.bean.UserBean;
 import com.root.entity.PolicyEntity;
 import com.root.entity.QuoteEntity;
 import com.root.entity.UserEntity;
+import com.root.objectConverter.ObjectConverter;
 
 public class PolicyDAOImpl implements PolicyDAO {
 
@@ -36,7 +37,7 @@ public class PolicyDAOImpl implements PolicyDAO {
 
 			PolicyEntity policyEntity = new PolicyEntity();
 			
-			policyEntity.setPolicy_id(policyBean.getPolicyId());
+			//policyEntity.setPolicy_id(policyBean.getPolicyId());
 			policyEntity.setEffective_date(policyBean.getEffectiveDate());
 			policyEntity.setEnd_date(policyBean.getEndDate());
 			policyEntity.setPolicy_status(policyBean.getPolicyStatus());
@@ -46,9 +47,10 @@ public class PolicyDAOImpl implements PolicyDAO {
 
 			entityManager.getTransaction().begin();
 			entityManager.persist(policyEntity);
-			System.out.println("Policy Bought Successfully");
+
 			entityManager.getTransaction().commit();
 			
+			System.out.println("Policy Bought Successfully");
 			System.out.println("policy id is"+policyEntity.getPolicy_id());
 
 		} catch (Exception e) {
@@ -61,23 +63,51 @@ public class PolicyDAOImpl implements PolicyDAO {
 
 	}
 
+	
 	@Override
-	public void viewPolicy(PolicyBean policyBean, UserBean userBean, QuoteBean quoteBean)
+	public PolicyBean viewPolicy(int policyId)
 			throws ClassNotFoundException, SQLException {
 		EntityManager entityManager = null;
 
-		String userName = null;
+		PolicyBean policyBean = new PolicyBean();
+		
 		try {
 
+			
 			EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("unit1");
 			entityManager = entityManagerFactory.createEntityManager();
 			entityManager.getTransaction().begin();
+			
+			/**
+			 * creating policyEntity object to fetch the policy object from the database
+			 */
 			PolicyEntity policyEntity = new PolicyEntity();
-			policyEntity.setPolicy_id(policyBean.getPolicyId());
-			policyEntity.setEffective_date(policyBean.getEffectiveDate());
-			policyEntity.setEnd_date(policyBean.getEffectiveDate());
-			policyEntity.setPolicy_status(policyBean.getPolicyStatus());
-			policyEntity.setTerm(policyBean.getPolicyTerm());
+			
+			policyEntity = entityManager.find(PolicyEntity.class, policyId);
+			
+			/**
+			 * converting quoteEntity to bean
+			 */
+			ObjectConverter converter = new ObjectConverter();
+			QuoteBean quoteBean = converter.convertQuoteEntityToBean(policyEntity.getQuoteEntity());
+
+
+			/**
+			 * converting userEntity to bean
+			 */
+			UserBean userBean = converter.convertUserEntityToBean(policyEntity.getUserEntity());
+			
+			
+			/**
+			 * setting policyEntity deta members into policyBean
+			 */
+			policyBean.setPolicyId(policyEntity.getPolicy_id());
+			policyBean.setEffectiveDate(policyEntity.getEffective_date());
+			policyBean.setEndDate(policyEntity.getEnd_date());
+			policyBean.setPolicyStatus(policyEntity.getPolicy_status());
+			policyBean.setPolicyTerm(policyEntity.getTerm());
+			policyBean.setQuote(quoteBean);
+			policyBean.setUser(userBean);
 
 			System.out.println("Policy View Enabled");
 
@@ -88,6 +118,8 @@ public class PolicyDAOImpl implements PolicyDAO {
 				entityManager.close();
 			}
 		}
+		
+		return policyBean;
 	}
 
 	@Override

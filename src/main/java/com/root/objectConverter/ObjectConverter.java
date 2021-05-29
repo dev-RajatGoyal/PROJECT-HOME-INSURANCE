@@ -3,10 +3,12 @@ package com.root.objectConverter;
 import com.root.bean.HomeOwnerBean;
 import com.root.bean.LocationBean;
 import com.root.bean.PropertyBean;
+import com.root.bean.QuoteBean;
 import com.root.bean.UserBean;
 import com.root.entity.HomeOwnerEntity;
 import com.root.entity.LocationEntity;
 import com.root.entity.PropertyEntity;
+import com.root.entity.QuoteEntity;
 import com.root.entity.UserEntity;
 
 public class ObjectConverter {
@@ -126,5 +128,36 @@ public class ObjectConverter {
 
 	}
 	
-
+	public QuoteBean convertQuoteEntityToBean(QuoteEntity entity)
+	{
+		QuoteBean bean = new QuoteBean();
+		
+		bean.setQuote_id(entity.getQuote_id());
+		bean.setMonthly_premium(entity.getMonthly_premium());
+		bean.setDwelling_coverage(entity.getDwelling_coverage());
+		bean.setDetached_structures(entity.getDetached_structures());
+		bean.setPersonal_property(entity.getPersonal_property());
+		bean.setAdd_living_exp(entity.getAdd_living_exp());
+		bean.setMedical_expense(entity.getMedical_expense());
+		bean.setDeductible(entity.getDeductible());
+		
+		return bean;
+	}
+	
+	
+	public QuoteEntity convertQuoteBeanToEntity(QuoteBean bean)
+	{
+		QuoteEntity entity = new QuoteEntity();
+		
+		entity.setQuote_id(bean.getQuote_id());
+		entity.setMonthly_premium(bean.getMonthly_premium());
+		entity.setDwelling_coverage(bean.getDwelling_coverage());
+		entity.setDetached_structures(bean.getDetached_structures());
+		entity.setPersonal_property(bean.getPersonal_property());
+		entity.setAdd_living_exp(bean.getAdd_living_exp());
+		entity.setMedical_expense(bean.getMedical_expense());
+		entity.setDeductible(bean.getDeductible());
+		
+		return entity;
+	}
 }

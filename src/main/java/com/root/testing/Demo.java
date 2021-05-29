@@ -10,6 +10,7 @@ import com.root.bean.QuoteBean;
 import com.root.bean.UserBean;
 import com.root.dao.PolicyDAOImpl;
 
+	
 			public class Demo extends PolicyDAOImpl {
 				public static void main(String args[]) throws ParseException, ClassNotFoundException, SQLException		{
 	/*				
@@ -26,20 +27,19 @@ import com.root.dao.PolicyDAOImpl;
 	Date date2 =new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);	
 
 			    PolicyBean  p=new PolicyBean();
-			    
+	    
 				p.setEffectiveDate(date1);
 				p.setEndDate(date2);
 				p.setPolicyStatus("Active");
 				p.setPolicyTerm(40);
 				
 				UserBean us=new UserBean();
-				us.setuserid(101);
+				us.setuserid(1001);
 				QuoteBean qb=new QuoteBean();
-				qb.setQuote_id(0);
+				qb.setQuote_id(13);
 				
 				PolicyDAOImpl ser=new PolicyDAOImpl();
 				ser.buyPolicy(p,us,qb);
-				
-				
-				
-				}	}
+
+			}
+		}
