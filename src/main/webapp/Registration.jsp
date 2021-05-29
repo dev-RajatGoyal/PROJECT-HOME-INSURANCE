@@ -134,13 +134,13 @@ $(document).ready(function() {
 					<label>User name :: </label> <input type="text" name="username"
 						id="username" placeholder="Enter your Username" autocomplete="off">
 				</div>
-				<div class="form-control">
+				<!-- <div class="form-control">
 					<label>Role :: </label><br> <select name="role" id="role">
 						<option value="User">User</option>
 						<option value="Admin">Admin</option>
 					</select>
 
-				</div>
+				</div> -->
 
 
 		<div class="form-control">

@@ -1,9 +1,7 @@
 package com.root.controller;
 
-import java.io.IOException;
+import java.io.IOException; 
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,13 +17,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.root.bean.HomeOwnerBean;
 import com.root.bean.LocationBean;
-import com.root.bean.PolicyBean;
 import com.root.bean.PropertyBean;
-import com.root.bean.QuoteBean;
 import com.root.bean.UserBean;
 import com.root.dao.HomeownerDAO;
 import com.root.dao.HomeownerDAOImpl;
-import com.root.dao.PolicyDAOImpl;
+
 import com.root.service.LocationService;
 import com.root.service.LocationServiceImpl;
 import com.root.service.QuoteService;
@@ -50,7 +46,7 @@ public class HomeController {
 
 
 	@RequestMapping(value="/userdashboard", method = RequestMethod.POST)
-	public ModelAndView showUserDashboard(HttpServletRequest request,HttpServletResponse response ,@RequestParam int userId, @RequestParam String password, Model model) throws ClassNotFoundException, SQLException, IOException 
+	public ModelAndView showUserDashboard(HttpServletRequest request,HttpServletResponse response ,@RequestParam int userId, @RequestParam String password,@RequestParam String role, Model model) throws ClassNotFoundException, SQLException, IOException 
 	{
 
 		HttpSession session = request.getSession();
@@ -68,10 +64,18 @@ public class HomeController {
 
 		session.setAttribute("userId", user.getuserid());
 
-		if(user.getuserid()==userId && user.getPassword().equals(password))
+		if(user.getuserid()==userId && user.getPassword().equals(password) && user.getRole().equals("User"))
 		{
 			//response.sendRedirect("UserDashboard2");
 			modelAndView.setViewName("UserDashboard2");			
+		}
+		else if(user.getuserid()==userId && user.getPassword().equals(password) && user.getRole().equals("Admin"))
+		{
+			modelAndView.setViewName("admiinDashboard");	
+		}
+		else
+		{
+			modelAndView.setViewName("Error");
 		}
 		return modelAndView;
 	}
@@ -88,14 +92,14 @@ public class HomeController {
 	@RequestMapping(value = "/registersuccess", method = RequestMethod.POST)
 	public ModelAndView RegisterSuccessful(UserBean user, Model model) throws ClassNotFoundException, SQLException {
 
-		model.addAttribute("username",user.getUsername());
+		//model.addAttribute("username",user.getUsername());
 		ModelAndView modelAndView = new ModelAndView();
 		System.out.println("HomeController.RegisterSuccessful()");
 		System.out.println(user.getCpassword() + "===" + user.getPassword());
 		String userName = null;
 		if (user.getPassword().equalsIgnoreCase(user.getCpassword()))
 			userName = userService.insertUser(user);
-		System.out.println(userName + "user name");
+		//System.out.println(userName + "user name");
 		if (!userName.equals(null)) {
 			modelAndView.setViewName("home");
 
@@ -106,29 +110,6 @@ public class HomeController {
 		return modelAndView;
 	}
 
-
-
-	/*
-	 * @RequestMapping(value="/register" , method = RequestMethod.GET) public
-	 * ModelAndView UserRegistration() { ModelAndView modelAndView = new
-	 * ModelAndView(); modelAndView.setViewName("Registration"); return
-	 * modelAndView; }
-	 * 
-	 * 
-	 * @RequestMapping(value="/registersuccess" , method = RequestMethod.POST)
-	 * public ModelAndView RegisterSuccessful(UserBean user) throws
-	 * ClassNotFoundException, SQLException { ModelAndView modelAndView = new
-	 * ModelAndView(); System.out.println("HomeController.RegisterSuccessful()");
-	 * System.out.println(user.getCpassword() + "===" + user.getPassword()); String
-	 * userName = null; if
-	 * (user.getPassword().equalsIgnoreCase(user.getCpassword())) userName =
-	 * userService.insertUser(user); System.out.println(userName + "user name"); if
-	 * (!userName.equals(null)) { modelAndView.setViewName("RegistrationSuccess");
-	 * 
-	 * } else { modelAndView.setViewName("userregistrationFailure"); }
-	 * 
-	 * return modelAndView; }
-	 */
 
 	@RequestMapping(value="/homeowner" , method = RequestMethod.POST)
 	public ModelAndView LocationPage(HttpServletRequest request,HttpServletResponse response,@ModelAttribute("home") HomeOwnerBean bean , Model model) 
@@ -178,7 +159,6 @@ public class HomeController {
 		QuoteService quoteService = new QuoteServiceImpl();
 		int quote_Id = quoteService.addQuote(location.getLocation_id());
 
-
 		model.addAttribute("user",user);
 
 
@@ -186,7 +166,6 @@ public class HomeController {
 		modelAndView.setViewName("UserDashboard");
 		modelAndView.addObject("message","Location and property add successfully");
 		return modelAndView;
-
 
 	}
 
@@ -219,9 +198,8 @@ public class HomeController {
 
 		session.removeAttribute("userId");
 		modelAndView.setViewName("home");
-		//response.sendRedirect("home");
 
 		return modelAndView;
 	}
-	
+	 
 }
