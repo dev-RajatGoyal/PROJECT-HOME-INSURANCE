@@ -29,7 +29,7 @@ public class QuoteDAOImpl implements QuoteDAO {
 			
 			QuoteEntity quoteEntity = new QuoteEntity();
 			
-			quoteEntity.setQuote_id(quoteBean.getQuote_id());
+			//quoteEntity.setQuote_id(quoteBean.getQuote_id());
 			quoteEntity.setMonthly_premium(quoteBean.getMonthly_premium());
 			quoteEntity.setDwelling_coverage(quoteBean.getDwelling_coverage());
 			quoteEntity.setDetached_structures(quoteBean.getDetached_structures());
@@ -48,7 +48,7 @@ public class QuoteDAOImpl implements QuoteDAO {
 			entityManager.getTransaction().commit();
 			
 			
-		    id= quoteEntity.getQuote_id();
+		    id = quoteEntity.getQuote_id();
 		
 		}
 		catch(Exception e)
@@ -62,19 +62,45 @@ public class QuoteDAOImpl implements QuoteDAO {
 		return id;
 
 	}
+
+	@Override
+	public QuoteBean findQuoteById(int quoteID) throws ClassNotFoundException, SQLException {
+		
+		EntityManager entityManager = null;
+		QuoteBean quoteBean = new QuoteBean();
+		
+		try
+		{
+			EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("unit1");
+			entityManager = entityManagerFactory.createEntityManager();
+			
+			entityManager.getTransaction().begin();
+			QuoteEntity quoteEntity = entityManager.find(QuoteEntity.class, quoteID);
+			entityManager.getTransaction().commit();
+			ObjectConverter converter = new ObjectConverter();
+			
+			quoteBean.setQuote_id(quoteEntity.getQuote_id()); 
+			quoteBean.setMonthly_premium(quoteEntity.getMonthly_premium());
+			quoteBean.setDwelling_coverage(quoteEntity.getDwelling_coverage());
+			quoteBean.setDetached_structures(quoteEntity.getDetached_structures());
+			quoteBean.setPersonal_property(quoteEntity.getPersonal_property());
+			quoteBean.setAdd_living_exp(quoteEntity.getAdd_living_exp());
+			quoteBean.setMedical_expense(quoteEntity.getMedical_expense());
+			quoteBean.setDeductible(quoteEntity.getDeductible());
+			
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			entityManager.close();
+		}
+		return quoteBean;
+	}
 	
 	
 	
 	
-	
-	
-	/*
-	 * public static QuoteEntity convertBeanToEntity(QuoteBean bean) { QuoteEntity
-	 * entity = new QuoteEntity(); entity.setQuote_id(bean.getQuote_id()); return
-	 * entity; }
-	 * 
-	 * public static QuoteBean convertEntityToBean(QuoteEntity entity) { QuoteBean
-	 * bean = new QuoteBean(); bean.setLocation_id(entity.getQuote_id()); return
-	 * bean; }
-	 */
 }

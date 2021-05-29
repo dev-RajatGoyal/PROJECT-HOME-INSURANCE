@@ -9,4 +9,5 @@ import com.root.bean.QuoteBean;
 public interface QuoteDAO {
 
 	int addQuote(LocationBean locationBean, QuoteBean quoteBean) throws ClassNotFoundException, SQLException;
+	QuoteBean findQuoteById(int quoteID) throws ClassNotFoundException, SQLException;
 }

@@ -24,12 +24,14 @@ public class QuoteServiceImpl implements QuoteService {
         System.out.println(locationBean.getProperty().getProperty_id());
 		
 		QuoteBean quoteBean = new QuoteBean();
-
+		
 		float FamilyYearlyPremium = 0;
 		float FamilyMonthlyPremium = 0;
 
 		PropertyEntity propertyEntity = new PropertyEntity();
 
+		
+		//quoteBean.setQuote_id(101);
 		float coverage = locationBean.getProperty().getMarket_value();
 
 		// quoteBean.setLocation_id(locationBean.getLocation_id());
@@ -128,6 +130,12 @@ public class QuoteServiceImpl implements QuoteService {
 		
 		return id;
 
+	}
+
+	@Override
+	public QuoteBean findQuoteById(int quoteID) throws ClassNotFoundException, SQLException {
+		
+		return quoteDao.findQuoteById(quoteID);
 	}
 
 }
