@@ -1,7 +1,9 @@
 package com.root.bean;
 
-public class QuoteBean {
+import org.apache.log4j.Logger;
 
+public class QuoteBean {
+	static final Logger LOGGER = Logger.getLogger(QuoteBean.class);
 	private int quote_id;
 	private float monthly_premium;
 	private float dwelling_coverage;
@@ -14,6 +16,7 @@ public class QuoteBean {
 	private LocationBean location_id;
 	
 	public int getQuote_id() {
+		LOGGER.info("Inside the Quote Bean");
 		return quote_id;
 	}
 	public void setQuote_id(int quote_id) {

@@ -4,10 +4,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.apache.log4j.Logger;
+
 @Entity
 @Table(name = "property")
 public class PropertyEntity {
-	
+	static final Logger LOGGER = Logger.getLogger(PropertyEntity.class);
 	@Id
 	private int property_id;
 	private int market_value;
@@ -21,6 +23,7 @@ public class PropertyEntity {
 	private int pool;
 	
 	public int getProperty_id() {
+		LOGGER.info("Inside the Property Entity");
 		return property_id;
 	}
 	public void setProperty_id(int property_id) {

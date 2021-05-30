@@ -1,7 +1,9 @@
 package com.root.bean;
 
-public class UserBean {
+import org.apache.log4j.Logger;
 
+public class UserBean {
+	static final Logger LOGGER = Logger.getLogger(UserBean.class);
 	private int userid;
 	private String username;
 	private String role;
@@ -14,6 +16,7 @@ public class UserBean {
 	}
 
 	public int getuserid() {
+		LOGGER.info("Inside the User Bean");
 		return userid;
 	}
 

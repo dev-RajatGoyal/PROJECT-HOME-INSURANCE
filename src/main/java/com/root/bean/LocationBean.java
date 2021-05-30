@@ -1,7 +1,9 @@
 package com.root.bean;
 
-public class LocationBean {
+import org.apache.log4j.Logger;
 
+public class LocationBean {
+	static final Logger LOGGER = Logger.getLogger(LocationBean.class);
 
 	private int location_id ;
 	private String residence_type;
@@ -18,6 +20,7 @@ public class LocationBean {
 	
 	
 	public UserBean getUser() {
+		LOGGER.info("Inside the Location Bean");
 		return user;
 	}
 	public void setUser(UserBean user) {

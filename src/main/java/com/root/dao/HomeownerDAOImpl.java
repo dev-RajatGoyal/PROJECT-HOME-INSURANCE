@@ -5,6 +5,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.apache.log4j.Logger;
+
 import com.root.bean.HomeOwnerBean;
 import com.root.bean.UserBean;
 import com.root.entity.HomeOwnerEntity;
@@ -13,6 +15,7 @@ import com.root.objectConverter.ObjectConverter;
 import com.root.service.UserServiceImpl;
 
 public class HomeownerDAOImpl implements HomeownerDAO {
+	static final Logger LOGGER = Logger.getLogger(HomeownerDAOImpl.class);
 
 	/**
 	 * This is a method for inserting Home Owner Details Here we use database
@@ -53,7 +56,9 @@ public class HomeownerDAOImpl implements HomeownerDAO {
 			entityManager.getTransaction().begin();
 			entityManager.persist(entity);
 			entityManager.getTransaction().commit();
+			LOGGER.info("Insert Home Owner Successfully");
 		} catch (Exception e) {
+			LOGGER.info("Something went wrong");
 			e.printStackTrace();
 		} finally {
 			if (entityManager != null) {

@@ -8,9 +8,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.apache.log4j.Logger;
+
 @Entity
 @Table(name="quotes")
 public class QuoteEntity {
+	static final Logger LOGGER = Logger.getLogger(QuoteEntity.class);
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,6 +32,7 @@ public class QuoteEntity {
 	
 	
 	public int getQuote_id() {
+		LOGGER.info("Inside the Quote Entity");
 		return quote_id;
 	}
 	public void setQuote_id(int quote_id) {

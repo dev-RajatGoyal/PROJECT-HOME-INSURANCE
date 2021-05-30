@@ -11,9 +11,12 @@ import javax.persistence.Id;
 //import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.apache.log4j.Logger;
+
 @Entity
 @Table(name="user")
 public class UserEntity {
+	static final Logger LOGGER = Logger.getLogger(UserEntity.class);
 	
 	@Id
 	private int user_id;
@@ -28,6 +31,7 @@ public class UserEntity {
 		
 	}
 	public int getUser_id() {
+		LOGGER.info("Inside the User Entity");
 		return user_id;
 	}
 

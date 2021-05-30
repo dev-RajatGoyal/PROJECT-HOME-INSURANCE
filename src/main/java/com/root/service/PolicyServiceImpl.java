@@ -1,5 +1,8 @@
 package com.root.service;
 import java.sql.SQLException;
+
+import org.apache.log4j.Logger;
+
 import com.root.bean.LocationBean;
 import com.root.bean.PolicyBean;
 import com.root.bean.PropertyBean;
@@ -10,16 +13,18 @@ import com.root.dao.PolicyDAOImpl;
 import com.root.entity.UserEntity;
 
 public class PolicyServiceImpl implements PolicyService {
+	static final Logger LOGGER = Logger.getLogger(PolicyServiceImpl.class);
 
 	PolicyDAO policDao = new  PolicyDAOImpl();
 
 	public void buyPolicy(PolicyBean policyBean, UserBean userBean, QuoteBean quoteBean) throws ClassNotFoundException, SQLException {
+		LOGGER.info("Inside Buy Policy Method from PolicyServiceImpl");
 		policDao.buyPolicy(policyBean,userBean,quoteBean);
 	}
 
 	@Override
 	public PolicyBean viewPolicy(int policyId) throws ClassNotFoundException, SQLException {
-		
+		LOGGER.info("Inside View Policy Method from PolicyServiceImpl");
 		return policDao.viewPolicy(policyId);
 	}
 }

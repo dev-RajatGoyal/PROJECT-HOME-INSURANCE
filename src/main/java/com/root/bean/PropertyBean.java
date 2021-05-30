@@ -1,6 +1,9 @@
 package com.root.bean;
 
+import org.apache.log4j.Logger;
+
 public class PropertyBean {
+	static final Logger LOGGER = Logger.getLogger(PropertyBean.class);
 	
 	private int property_id;
 	private int market_value;
@@ -22,6 +25,7 @@ public class PropertyBean {
 	
 	
 	public int getProperty_id() {
+		LOGGER.info("Inside the Property Bean");
 		return property_id;
 	}
 	public void setProperty_id(int property_id) {

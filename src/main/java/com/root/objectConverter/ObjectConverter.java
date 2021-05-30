@@ -1,5 +1,7 @@
 package com.root.objectConverter;
 
+import org.apache.log4j.Logger;
+
 import com.root.bean.HomeOwnerBean;
 import com.root.bean.LocationBean;
 import com.root.bean.PropertyBean;
@@ -12,9 +14,10 @@ import com.root.entity.QuoteEntity;
 import com.root.entity.UserEntity;
 
 public class ObjectConverter {
+	static final Logger LOGGER = Logger.getLogger(ObjectConverter.class);
 
 	public HomeOwnerEntity convertHomeBenasToEntity(HomeOwnerBean home) {
-
+		LOGGER.info("Inside the convertHomeBeanToEntity Method");
 		HomeOwnerEntity entity = new HomeOwnerEntity();
 
 		entity.setDob(home.getDob());
@@ -24,12 +27,13 @@ public class ObjectConverter {
 		entity.setOwnerId(home.getOwnerId());
 		entity.setRetired(home.getRetired());
 		entity.setSocialSocietyNumber(home.getSocialSocietyNumber());
-
+		LOGGER.info("Convert HomeBean to HomeEntity Successfully");
 		return entity;
 
 	}
 
 	public LocationEntity convertLocationBeansToEntity(LocationBean bean) {
+		LOGGER.info("Inside the convertLocationBeansToEntity Method");
 		LocationEntity entity = new LocationEntity();
 
 		entity.setLocation_id(bean.getLocation_id());
@@ -40,7 +44,7 @@ public class ObjectConverter {
 		entity.setResidence_type(bean.getResidence_type());
 		entity.setResidence_use(bean.getResidence_use());
 		entity.setZip_code(bean.getZip_code());
-
+		LOGGER.info("Convert LocationBean to LocationEntity Successfully");
 		return entity;
 
 	}
@@ -48,7 +52,7 @@ public class ObjectConverter {
 	
 
 	public LocationBean convertLocationEntityToBean(LocationEntity entity) {
-		
+		LOGGER.info("Inside the convertLocationEntityToBean Method");
 		LocationBean bean = new LocationBean();
 
 		bean.setLocation_id(entity.getLocation_id());
@@ -59,12 +63,13 @@ public class ObjectConverter {
 		bean.setResidence_type(entity.getResidence_type());
 		bean.setResidence_use(entity.getResidence_use());
 		bean.setZip_code(entity.getZip_code());
-
+		LOGGER.info("Convert LocationEntity to LocationBean Successfully");
 		return bean;
 
 	}
 	
 	public UserEntity convertUserBeansToEntity(UserBean bean) {
+		LOGGER.info("Inside the convertUserBeansToEntity Method");
 		UserEntity entity = new UserEntity();
 
 		entity.setUser_id(bean.getuserid());
@@ -73,10 +78,12 @@ public class ObjectConverter {
 		entity.setConfirmPassword(bean.getCpassword());
 		entity.setRole(bean.getRole());
 		entity.setEmail(bean.getEmail());
+		LOGGER.info("Convert UserBean to UserEntity Successfully");
 		return entity;
 
 	}
 	public UserBean convertUserEntityToBean(UserEntity entity) {
+		LOGGER.info("Inside the convertUserEntityToBean Method");
 		UserBean bean = new UserBean();
 
 		bean.setuserid(entity.getUser_id());
@@ -85,12 +92,14 @@ public class ObjectConverter {
 		bean.setCpassword(entity.getConfirmPassword());
 		bean.setRole(entity.getRole());
 		bean.setEmail(entity.getEmail());
+		LOGGER.info("Convert UserEntity to UserBean Successfully");
 		return bean;
 
 	}
 
 
 	public PropertyEntity convertPropertyBeanToEntity(PropertyBean propertyBean) {
+		LOGGER.info("Inside the convertPropertyBeanToEntity Method");
 		PropertyEntity propertyEntity = new PropertyEntity();
 
 		propertyEntity.setDwelling_type(propertyBean.getDwelling_type());
@@ -103,7 +112,7 @@ public class ObjectConverter {
 		propertyEntity.setRoof_material(propertyBean.getRoof_material());
 		propertyEntity.setSquare_footage(propertyBean.getSquare_footage());
 		propertyEntity.setYear_built(propertyBean.getYear_built());
-
+		LOGGER.info("Convert PropertyBean to PropertyEntity Successfully");
 		return propertyEntity;
 
 	}
@@ -111,6 +120,7 @@ public class ObjectConverter {
 	
 	
 	public PropertyBean convertPropertyEntityToBean(PropertyEntity entity) {
+		LOGGER.info("Inside the convertPropertyEntityToBean Method");
 		PropertyBean bean= new PropertyBean();
 
 		bean.setDwelling_type(entity.getDwelling_type());
@@ -123,7 +133,7 @@ public class ObjectConverter {
 		bean.setRoof_material(entity.getRoof_material());
 		bean.setSquare_footage(entity.getSquare_footage());
 		bean.setYear_built(entity.getYear_built());
-
+		LOGGER.info("Inside the Convery PropertyEntity To PropertyBean Method");
 		return bean;
 
 	}

@@ -6,6 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.apache.log4j.Logger;
+
 import com.root.bean.LocationBean;
 import com.root.bean.QuoteBean;
 import com.root.entity.LocationEntity;
@@ -13,6 +15,7 @@ import com.root.entity.QuoteEntity;
 import com.root.objectConverter.ObjectConverter;
 
 public class QuoteDAOImpl implements QuoteDAO {
+	static final Logger LOGGER = Logger.getLogger(QuoteDAOImpl.class);
 
 
 	public int addQuote(LocationBean locationBean, QuoteBean quoteBean)
@@ -47,12 +50,13 @@ public class QuoteDAOImpl implements QuoteDAO {
 			entityManager.persist(quoteEntity);
 			entityManager.getTransaction().commit();
 			
-			
+			LOGGER.info("Insert Quote Successfully");
 		    id = quoteEntity.getQuote_id();
 		
 		}
 		catch(Exception e)
 		{
+			LOGGER.info("Something went wrong");
 			e.printStackTrace();
 		}
 		finally
@@ -87,10 +91,11 @@ public class QuoteDAOImpl implements QuoteDAO {
 			quoteBean.setAdd_living_exp(quoteEntity.getAdd_living_exp());
 			quoteBean.setMedical_expense(quoteEntity.getMedical_expense());
 			quoteBean.setDeductible(quoteEntity.getDeductible());
-			
+			LOGGER.info("Retrieve Quote Successfully");
 		}
 		catch(Exception e)
 		{
+			LOGGER.info("Something went wrong");
 			e.printStackTrace();
 		}
 		finally

@@ -4,6 +4,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.apache.log4j.Logger;
+
 import com.root.bean.LocationBean;
 import com.root.bean.PropertyBean;
 import com.root.bean.UserBean;
@@ -13,7 +15,7 @@ import com.root.entity.UserEntity;
 import com.root.objectConverter.ObjectConverter;
 
 public class LocationDaoImpl implements LocationDao {
-
+	static final Logger LOGGER = Logger.getLogger(LocationDaoImpl.class);
 	
 	/**
 	 * This is a method for inserting Location and property Details together
@@ -76,8 +78,9 @@ public class LocationDaoImpl implements LocationDao {
 			entityManager.getTransaction().begin();
 			entityManager.persist(locationEntity);
 			entityManager.getTransaction().commit();
-
+			LOGGER.info("Add Location With Property");
 		} catch (Exception e) {
+			LOGGER.info("Something went wrong");
 			System.out.println(e);
 
 		} finally {
@@ -120,8 +123,10 @@ public class LocationDaoImpl implements LocationDao {
 
 			entityManager.remove(locationEntity);
 			entityManager.getTransaction().commit();
+			LOGGER.info("Remove Loaction And Property");
 
 		} catch (Exception e) {
+			LOGGER.info("Something went wrong");
 			throw e;
 
 		} finally {
@@ -182,9 +187,11 @@ public class LocationDaoImpl implements LocationDao {
 			bean = converter.convertLocationEntityToBean(entity);
 			bean.setUser(userBean);
 			bean.setProperty(propertyBean);
+			LOGGER.info("Find Location By Location Id");
 		}
 		catch(Exception e)
 		{
+			LOGGER.info("Something went wrong");
 			throw e;
 		}finally
 		{

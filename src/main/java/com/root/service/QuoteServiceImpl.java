@@ -2,6 +2,8 @@ package com.root.service;
 
 import java.sql.SQLException;
 
+import org.apache.log4j.Logger;
+
 import com.root.bean.LocationBean;
 import com.root.bean.QuoteBean;
 import com.root.dao.LocationDao;
@@ -11,13 +13,13 @@ import com.root.dao.QuoteDAOImpl;
 import com.root.entity.PropertyEntity;
 
 public class QuoteServiceImpl implements QuoteService {
-
+	static final Logger LOGGER = Logger.getLogger(QuoteServiceImpl.class);
 	private QuoteDAO quoteDao = new QuoteDAOImpl();
 
 	LocationDao locationDao = new LocationDaoImpl();
 
 	public int addQuote(int locationId) throws ClassNotFoundException, SQLException {
-
+		LOGGER.info("Inside Add Quote Method from QuoteServiceImpl");
 		LocationBean locationBean = locationDao.findLocationByLocationId(locationId);
 		
 		System.out.println("test location in quoteService"+locationBean);

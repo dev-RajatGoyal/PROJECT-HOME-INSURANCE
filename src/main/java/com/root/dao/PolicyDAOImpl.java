@@ -7,6 +7,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.apache.log4j.Logger;
+
 import com.root.bean.PolicyBean;
 import com.root.bean.QuoteBean;
 import com.root.bean.UserBean;
@@ -16,6 +18,7 @@ import com.root.entity.UserEntity;
 import com.root.objectConverter.ObjectConverter;
 
 public class PolicyDAOImpl implements PolicyDAO {
+	static final Logger LOGGER = Logger.getLogger(PolicyDAOImpl.class);
 
 	@Override
 	public void buyPolicy(PolicyBean policyBean, UserBean userBean, QuoteBean quoteBean)
@@ -50,10 +53,11 @@ public class PolicyDAOImpl implements PolicyDAO {
 
 			entityManager.getTransaction().commit();
 			
-			System.out.println("Policy Bought Successfully");
-			System.out.println("policy id is"+policyEntity.getPolicy_id());
+			LOGGER.info("Policy Bought Successfully");
+			LOGGER.info("policy id is"+policyEntity.getPolicy_id());
 
 		} catch (Exception e) {
+			LOGGER.info("Something went wrong PolicyDAOImpl");
 			e.printStackTrace();
 		} finally {
 			if (entityManager != null) {
@@ -108,10 +112,11 @@ public class PolicyDAOImpl implements PolicyDAO {
 			policyBean.setPolicyTerm(policyEntity.getTerm());
 			policyBean.setQuote(quoteBean);
 			policyBean.setUser(userBean);
+			LOGGER.info("Policy View Enabled");
 
-			System.out.println("Policy View Enabled");
 
 		} catch (Exception e) {
+			LOGGER.info("Something went wrong");
 			e.printStackTrace();
 		} finally {
 			if (entityManager != null) {
@@ -139,9 +144,10 @@ public class PolicyDAOImpl implements PolicyDAO {
 			policyEntity.setEnd_date(policyBean.getEffectiveDate());
 			policyEntity.setPolicy_status(policyBean.getPolicyStatus());
 			policyEntity.setTerm(policyBean.getPolicyTerm());
-			System.out.println("Policy Renewed Successfully");
+			LOGGER.info("Policy Renewed Successfully");
 
 		} catch (Exception e) {
+			LOGGER.info("Something went wrong");
 			e.printStackTrace();
 		} finally {
 			if (entityManager != null) {

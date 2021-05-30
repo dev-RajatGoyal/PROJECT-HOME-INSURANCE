@@ -37,7 +37,7 @@
            		    	<input type="password" class="input" name="password">
             	   </div>
             	   
-            	   <div class="div">
+            	     <div class="div">
 					<label>Role</label> <select name="role" id="role">
 						<option value="User">User</option>
 						<option value="Admin">Admin</option>

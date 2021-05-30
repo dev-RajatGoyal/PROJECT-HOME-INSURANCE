@@ -8,9 +8,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.apache.log4j.Logger;
+
 @Entity
 @Table(name="policy")
 public class PolicyEntity {
+	static final Logger LOGGER = Logger.getLogger(PolicyEntity.class);
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int policy_id;
@@ -20,6 +23,7 @@ public class PolicyEntity {
 	private UserEntity userEntity;
 	
 	public QuoteEntity getQuoteEntity() {
+		LOGGER.info("Inside the Policy Entity");
 		return quoteEntity;
 	}
 

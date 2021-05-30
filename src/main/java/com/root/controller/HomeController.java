@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -31,6 +32,7 @@ import com.root.service.UserServiceImpl;
 
 @Controller
 public class HomeController {
+	static final Logger LOGGER = Logger.getLogger(HomeController.class);
 
 	UserService userService = new UserServiceImpl();
 
@@ -40,6 +42,7 @@ public class HomeController {
 	{	
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("home");
+		LOGGER.info("Welcome Page");
 		return modelAndView;
 	}
 
@@ -67,15 +70,18 @@ public class HomeController {
 		if(user.getuserid()==userId && user.getPassword().equals(password) && user.getRole().equals("User"))
 		{
 			//response.sendRedirect("UserDashboard2");
-			modelAndView.setViewName("UserDashboard2");			
+			modelAndView.setViewName("UserDashboard2");	
+			LOGGER.info("User Login Successfully and move to user dashboard");
 		}
 		else if(user.getuserid()==userId && user.getPassword().equals(password) && user.getRole().equals("Admin"))
 		{
-			modelAndView.setViewName("admiinDashboard");	
+			modelAndView.setViewName("admiinDashboard");
+			LOGGER.info("Admin Login Successfully and move to Admin dashboard");
 		}
 		else
 		{
 			modelAndView.setViewName("Error");
+			LOGGER.info("Login Failed");
 		}
 		return modelAndView;
 	}
@@ -86,6 +92,7 @@ public class HomeController {
 		System.out.println("HomeController.UserRegistration()");
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("Registration");
+		LOGGER.info("Show Registration Page to User");
 		return modelAndView;
 	}
 
@@ -94,17 +101,19 @@ public class HomeController {
 
 		//model.addAttribute("username",user.getUsername());
 		ModelAndView modelAndView = new ModelAndView();
-		System.out.println("HomeController.RegisterSuccessful()");
-		System.out.println(user.getCpassword() + "===" + user.getPassword());
+		LOGGER.info("HomeController.RegisterSuccessful()");
+		LOGGER.info(user.getCpassword() + "===" + user.getPassword());
 		String userName = null;
 		if (user.getPassword().equalsIgnoreCase(user.getCpassword()))
 			userName = userService.insertUser(user);
 		//System.out.println(userName + "user name");
 		if (!userName.equals(null)) {
 			modelAndView.setViewName("home");
+			LOGGER.info("User registration success");
 
 		} else {
 			modelAndView.setViewName("userregistrationFailure");
+			LOGGER.info("User registration Failed");
 		}
 
 		return modelAndView;
@@ -134,6 +143,7 @@ public class HomeController {
 
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("UserDashboard2");
+		LOGGER.info("User able to fill Homeowner details");
 		return modelAndView;
 	}
 
@@ -165,6 +175,7 @@ public class HomeController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("UserDashboard");
 		modelAndView.addObject("message","Location and property add successfully");
+		LOGGER.info("User able to fill Property and Location details");
 		return modelAndView;
 
 	}
@@ -174,6 +185,7 @@ public class HomeController {
 	public ModelAndView updatePassword() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("updatePassword");
+		LOGGER.info("Show update password page");
 		return modelAndView;
 	}
 
@@ -184,9 +196,13 @@ public class HomeController {
 		UserBean bean = userService.updatePassword(user);
 		// System.out.println(userName+"user name");
 		if (bean != null)
+		{
 			modelAndView.setViewName("updateSuccess");
+		LOGGER.info("Update Password Successfully");
+		}
 		else
 			modelAndView.setViewName("updateFail");
+		LOGGER.info("Update Password failed");
 		return modelAndView;
 	}
 
@@ -198,6 +214,7 @@ public class HomeController {
 
 		session.removeAttribute("userId");
 		modelAndView.setViewName("home");
+		LOGGER.info("Back to Home after logout");
 
 		return modelAndView;
 	}

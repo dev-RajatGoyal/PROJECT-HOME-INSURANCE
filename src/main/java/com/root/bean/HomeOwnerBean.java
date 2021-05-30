@@ -2,7 +2,10 @@ package com.root.bean;
 
 import java.util.Date;
 
+import org.apache.log4j.Logger;
+
 public class HomeOwnerBean {
+	static final Logger LOGGER = Logger.getLogger(HomeOwnerBean.class);
 
 	private int ownerId;
 	private String fname;
@@ -16,6 +19,7 @@ public class HomeOwnerBean {
 	
 	
 	public UserBean getUser() {
+		LOGGER.info("Inside the Home Owner Bean");
 		return user;
 	}
 

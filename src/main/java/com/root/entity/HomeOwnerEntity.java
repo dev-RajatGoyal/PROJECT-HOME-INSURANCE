@@ -7,9 +7,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.apache.log4j.Logger;
+
 @Entity
 @Table(name="homeowner")
 public class HomeOwnerEntity {
+	static final Logger LOGGER = Logger.getLogger(HomeOwnerEntity.class);
 	
 
 	@Id
@@ -27,6 +30,7 @@ public class HomeOwnerEntity {
 	
 
 	public UserEntity getUser() {
+		LOGGER.info("Inside the Home Owner Entity");
 		return user;
 	}
 

@@ -4,11 +4,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.apache.log4j.Logger;
+
 import com.root.bean.UserBean;
 import com.root.entity.UserEntity;
 import com.root.objectConverter.*;
 
 public class UserDAOImpl implements UserDAO {
+	static final Logger LOGGER = Logger.getLogger(UserDAOImpl.class);
 
 	public String insertUser(UserBean userBean) {
 		
@@ -31,11 +34,11 @@ public class UserDAOImpl implements UserDAO {
 			
 			entityManager.persist(userEntity);
 			entityManager.getTransaction().commit();
-
-			System.out.println("insertUser success");
+			LOGGER.info("insertUser success");
+			
 			userName = userEntity.getUser_name();
 		} catch (Exception e) {
-			System.out.println("something went wrong");
+			LOGGER.info("something went wrong");
 			e.printStackTrace();
 		} finally {
 			if (entityManager != null) {
@@ -66,9 +69,11 @@ public class UserDAOImpl implements UserDAO {
 			userBean.setEmail(userEntity.getEmail());
 			
 			entityManager.getTransaction().commit();
+			LOGGER.info("View User Successfully");
 		}
 		catch(Exception e)
 		{
+			LOGGER.info("Something went wrong");
 			e.printStackTrace();
 		}
 		finally
@@ -107,11 +112,11 @@ public class UserDAOImpl implements UserDAO {
 				entityManager.getTransaction().commit();
 
 			}else {
-				System.out.println("No recored ");
+				LOGGER.info("No recored ");
 			}
 			
 		} catch (Exception e) {
-			System.out.println("something went wrong");
+			LOGGER.info("something went wrong");
 			e.printStackTrace();
 		} finally {
 			if (entityManager != null) {

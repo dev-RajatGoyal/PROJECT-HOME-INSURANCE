@@ -1,7 +1,10 @@
 package com.root.bean;
 import java.util.Date;
 
+import org.apache.log4j.Logger;
+
 public class PolicyBean {
+	static final Logger LOGGER = Logger.getLogger(PolicyBean.class);
 	private int policyId;
 	private QuoteBean quote;
 	private UserBean user;
@@ -13,6 +16,7 @@ public class PolicyBean {
 	
 
 	public QuoteBean getQuote() {
+		LOGGER.info("Inside the Policy Bean");
 		return quote;
 	}
 

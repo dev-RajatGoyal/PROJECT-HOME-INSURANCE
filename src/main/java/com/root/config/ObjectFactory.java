@@ -1,5 +1,6 @@
 package com.root.config;
 
+import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
@@ -12,21 +13,21 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @ComponentScan (basePackages = {"com.root.controller"})
 @EnableWebMvc
 public class ObjectFactory implements WebMvcConfigurer {
-	
+	static final Logger LOGGER = Logger.getLogger(ObjectFactory.class);
 	{
-		System.out.println("Object factory initialized");
+		LOGGER.info("Object factory initialized");
 	}
 	
 	@Bean
 	public InternalResourceViewResolver resolver()
 	{
-		System.out.println("view resolver executes");
+		LOGGER.info("view resolver executes");
 		return new InternalResourceViewResolver("/",".jsp");
 	}
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		System.out.println("addResourceHandlers executes");
+		LOGGER.info("addResourceHandlers executes");
 		registry.addResourceHandler("/**").addResourceLocations("/");
 	}
 }

@@ -8,9 +8,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.apache.log4j.Logger;
+
 @Entity
 @Table(name ="Location")
 public class LocationEntity {
+	static final Logger LOGGER = Logger.getLogger(LocationEntity.class);
 
 	@Id
 	private int location_id ;
@@ -32,6 +35,7 @@ public class LocationEntity {
 	
 	
 	public int getLocation_id() {
+		LOGGER.info("Inside the Location Entity");
 		return location_id;
 	}
 	public void setLocation_id(int location_id) {
