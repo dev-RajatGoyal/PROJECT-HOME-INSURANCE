@@ -1,6 +1,6 @@
 package com.root.controller;
 
-import java.io.IOException; 
+import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,13 +18,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.root.bean.HomeOwnerBean;
 import com.root.bean.LocationBean;
+import com.root.bean.PolicyBean;
 import com.root.bean.PropertyBean;
+import com.root.bean.QuoteBean;
 import com.root.bean.UserBean;
 import com.root.dao.HomeownerDAO;
 import com.root.dao.HomeownerDAOImpl;
-
 import com.root.service.LocationService;
 import com.root.service.LocationServiceImpl;
+import com.root.service.PolicyService;
+import com.root.service.PolicyServiceImpl;
 import com.root.service.QuoteService;
 import com.root.service.QuoteServiceImpl;
 import com.root.service.UserService;
@@ -35,7 +38,7 @@ public class HomeController {
 	static final Logger LOGGER = Logger.getLogger(HomeController.class);
 
 	UserService userService = new UserServiceImpl();
-
+	PolicyService policyService = new PolicyServiceImpl();
 
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public ModelAndView showHomePage()
@@ -75,7 +78,10 @@ public class HomeController {
 		}
 		else if(user.getuserid()==userId && user.getPassword().equals(password) && user.getRole().equals("Admin"))
 		{
-			modelAndView.setViewName("admiinDashboard");
+			PolicyBean policyBean = policyService.viewPolicy(14);
+			model.addAttribute("policy",policyBean);
+			
+			modelAndView.setViewName("AdminDashboard");
 			LOGGER.info("Admin Login Successfully and move to Admin dashboard");
 		}
 		else
@@ -104,6 +110,10 @@ public class HomeController {
 		LOGGER.info("HomeController.RegisterSuccessful()");
 		LOGGER.info(user.getCpassword() + "===" + user.getPassword());
 		String userName = null;
+		
+		String userRole = "User";
+		user.setRole(userRole);
+		
 		if (user.getPassword().equalsIgnoreCase(user.getCpassword()))
 			userName = userService.insertUser(user);
 		//System.out.println(userName + "user name");
@@ -164,16 +174,22 @@ public class HomeController {
 
 		LocationService service = new LocationServiceImpl();
 		service.addLocationWithProperty(location, property, userBean);
-
+		
+		HomeOwnerBean home = new HomeOwnerBean();
+		model.addAttribute("home",home);
 
 		QuoteService quoteService = new QuoteServiceImpl();
 		int quote_Id = quoteService.addQuote(location.getLocation_id());
+		QuoteBean quoteBean =quoteService.findQuoteById(quote_Id);
+		
+		
+		model.addAttribute("quote",quoteBean);
 
 		model.addAttribute("user",user);
 
 
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("UserDashboard");
+		modelAndView.setViewName("UserDashboard2");
 		modelAndView.addObject("message","Location and property add successfully");
 		LOGGER.info("User able to fill Property and Location details");
 		return modelAndView;
@@ -218,5 +234,5 @@ public class HomeController {
 
 		return modelAndView;
 	}
-	 
+	
 }

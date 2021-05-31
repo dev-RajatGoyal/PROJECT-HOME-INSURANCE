@@ -43,6 +43,7 @@ public class QuoteDAOImpl implements QuoteDAO {
 			
 			ObjectConverter converter = new ObjectConverter();
 			LocationEntity entity = converter.convertLocationBeansToEntity(locationBean);
+			
 			quoteEntity.setLocationEntity(entity);
 			
 			
@@ -83,6 +84,9 @@ public class QuoteDAOImpl implements QuoteDAO {
 			entityManager.getTransaction().commit();
 			ObjectConverter converter = new ObjectConverter();
 			
+			
+			LocationBean locationBean = converter.convertLocationEntityToBean(quoteEntity.getLocationEntity());
+			
 			quoteBean.setQuote_id(quoteEntity.getQuote_id()); 
 			quoteBean.setMonthly_premium(quoteEntity.getMonthly_premium());
 			quoteBean.setDwelling_coverage(quoteEntity.getDwelling_coverage());
@@ -91,6 +95,7 @@ public class QuoteDAOImpl implements QuoteDAO {
 			quoteBean.setAdd_living_exp(quoteEntity.getAdd_living_exp());
 			quoteBean.setMedical_expense(quoteEntity.getMedical_expense());
 			quoteBean.setDeductible(quoteEntity.getDeductible());
+			quoteBean.setLocation_id(locationBean);
 			LOGGER.info("Retrieve Quote Successfully");
 		}
 		catch(Exception e)

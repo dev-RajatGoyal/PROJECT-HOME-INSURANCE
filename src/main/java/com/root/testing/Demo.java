@@ -9,7 +9,6 @@ import com.root.bean.PolicyBean;
 import com.root.bean.QuoteBean;
 import com.root.bean.UserBean;
 import com.root.dao.PolicyDAOImpl;
-
 	
 			public class Demo extends PolicyDAOImpl {
 				public static void main(String args[]) throws ParseException, ClassNotFoundException, SQLException		{
@@ -34,9 +33,9 @@ import com.root.dao.PolicyDAOImpl;
 				p.setPolicyTerm(40);
 				
 				UserBean us=new UserBean();
-				us.setuserid(1001);
+				us.setuserid(1007);
 				QuoteBean qb=new QuoteBean();
-				qb.setQuote_id(13);
+				qb.setQuote_id(15);
 				
 				PolicyDAOImpl ser=new PolicyDAOImpl();
 				ser.buyPolicy(p,us,qb);

@@ -157,4 +157,38 @@ public class PolicyDAOImpl implements PolicyDAO {
 
 	}
 
+
+	@Override
+	public void canclePoicy(int policyId) throws ClassNotFoundException, SQLException {
+		
+		EntityManager entityManager = null;
+		
+		try
+		{
+			EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("unit1");
+			entityManager = entityManagerFactory.createEntityManager();
+			
+			/**
+			 * fetching existing policyEntity fromt the database
+			 */
+			PolicyEntity policyEntity = new PolicyEntity();
+			policyEntity = entityManager.find(PolicyEntity.class, policyId);
+		
+			entityManager.getTransaction().begin();
+			entityManager.remove(policyEntity);
+			entityManager.getTransaction().commit();
+			LOGGER.info("Policy Canceled Successfully");
+			System.out.println("Policy cancled successfully");
+		
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally 
+		{
+			entityManager.close();
+		}
+	}
+
 }

@@ -15,17 +15,23 @@ import com.root.entity.UserEntity;
 public class PolicyServiceImpl implements PolicyService {
 	static final Logger LOGGER = Logger.getLogger(PolicyServiceImpl.class);
 
-	PolicyDAO policDao = new  PolicyDAOImpl();
+	PolicyDAO policyDao = new  PolicyDAOImpl();
 
 	public void buyPolicy(PolicyBean policyBean, UserBean userBean, QuoteBean quoteBean) throws ClassNotFoundException, SQLException {
 		LOGGER.info("Inside Buy Policy Method from PolicyServiceImpl");
-		policDao.buyPolicy(policyBean,userBean,quoteBean);
+		policyDao.buyPolicy(policyBean,userBean,quoteBean);
 	}
 
 	@Override
 	public PolicyBean viewPolicy(int policyId) throws ClassNotFoundException, SQLException {
 		LOGGER.info("Inside View Policy Method from PolicyServiceImpl");
-		return policDao.viewPolicy(policyId);
+		return policyDao.viewPolicy(policyId);
+	}
+
+	@Override
+	public void canclePoicy(int policyId) throws ClassNotFoundException, SQLException {
+		LOGGER.info("Inside Cancle Policy Method from PolicyServiceImpl");
+		policyDao.canclePoicy(policyId);
 	}
 }
 
