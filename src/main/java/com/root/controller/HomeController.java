@@ -142,8 +142,7 @@ public class HomeController {
 		HomeOwnerBean home = new HomeOwnerBean();
 		model.addAttribute("home",home);
 		
-		PolicyBean policy= new PolicyBean();
-		model.addAttribute("policy",policy);
+		
 		
 		
 
@@ -153,11 +152,17 @@ public class HomeController {
 		user = userService.viewUserByUserId(userId);
 		model.addAttribute("user",user);
 
+		
 		session.setAttribute("userId", user.getuserid());
 		
 		
+		PolicyBean policy= new PolicyBean();
+		policy=policyService.viewPolicyByUserId(userId);
 		
-		if(user.getuserid()==userId && user.getPassword().equals(password))
+		model.addAttribute("policy",policy);
+		
+		
+		if(user.getuserid()==userId && user.getPassword().equals(password) && user.getRole().equals("User"))
 		{
 			//response.sendRedirect("UserDashboard2");
 			modelAndView.setViewName("UserDashboard3");	
@@ -225,7 +230,14 @@ public class HomeController {
 	@RequestMapping(value="/homeowner" , method = RequestMethod.POST)
 	public ModelAndView HomeOwnerInsert(HttpServletRequest request,HttpServletResponse response, Model model,@Valid  @ModelAttribute("home") HomeOwnerBean bean ,BindingResult br) 
 	{
-		HttpSession session = request.getSession();
+		ModelAndView modelAndView = new ModelAndView();
+		HttpSession session = request.getSession(false);
+		
+		if(session == null)
+		{
+			modelAndView.setViewName("redirect:/");
+		}
+		
 		int userId = (Integer)session.getAttribute("userId");
 		System.out.println("inside homeOwner handler methood "+userId+" logged in");
 		
@@ -243,18 +255,26 @@ public class HomeController {
 		bean.setUser(user);
 
 		
-
-		ModelAndView modelAndView = new ModelAndView();
 		if(br.hasErrors())
 		{
 	    	model.addAttribute("msg" ,"Oops ! something Went Wrong , Please check Your Fields");
 			modelAndView.setViewName("UserDashboard3");
 			LOGGER.info("User not able to fill Homeowner details");	
 		}else {
+			
+			try
+			{
 			homeOwner.insertHomeOwner(bean);
-	    	model.addAttribute("msg" ,"HomeOwner Details Add Successfully");
+			model.addAttribute("msg" ,"HomeOwner Details Add Successfully");
 			modelAndView.setViewName("UserDashboard3");
 			LOGGER.info("User able to fill Homeowner details");
+			}
+			catch(Exception e)
+			{System.out.println("Error in homeowner");
+				model.addAttribute("msg" ,"HomeOwner Details did not Add Successfully");
+				
+				}
+	    	
 		}
 		
 		return modelAndView;
@@ -267,7 +287,13 @@ public class HomeController {
 	@RequestMapping(value="/location" , method = RequestMethod.POST)
 	public ModelAndView submitPropertyAndLocation(HttpServletRequest request,HttpServletResponse response, Model model, @Valid @ModelAttribute("location")  LocationBean location, BindingResult br) throws ClassNotFoundException, SQLException
 	{
-		HttpSession session = request.getSession();
+		ModelAndView modelAndView = new ModelAndView();
+        HttpSession session = request.getSession(false);
+		
+		if(session == null)
+		{
+			modelAndView.setViewName("redirect:/");
+		}
 		int userId = (Integer)session.getAttribute("userId");
 		System.out.println("inside submitPropertyAndLocation handler methood "+userId+" logged in");
 
@@ -288,9 +314,6 @@ public class HomeController {
 
 	
 		model.addAttribute("user",user);
-
-
-		ModelAndView modelAndView = new ModelAndView();
 		
 		if(br.hasErrors())
 		{
@@ -361,7 +384,7 @@ public class HomeController {
 		if (bean != null) {
 			modelAndView.setViewName("sendOTP");
 			//generating otp for user
-			Random rand=new Random(1000);		
+			Random rand=new Random();		
 			int otp=rand.nextInt(10000);
 			// writing email code here
 	         String subject="Otp From RealCoderz";
@@ -390,7 +413,7 @@ public class HomeController {
 		if(otp==pass.getOtp())
 			bean = userService.submitotp(pass);
 		if (bean != null) 
-			modelAndView.setViewName("updateSuccess");
+			modelAndView.setViewName("home");
 		else
 			modelAndView.setViewName("updateFail");
 		return modelAndView;
@@ -402,6 +425,9 @@ public class HomeController {
 	
 	
 	
+
+	
+
 	
 	/**
 	 * This handler mapping used to logout
@@ -410,10 +436,10 @@ public class HomeController {
 	public ModelAndView logout(HttpServletRequest request,HttpServletResponse response ) throws IOException
 	{
 		ModelAndView modelAndView = new ModelAndView();
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 
-		session.removeAttribute("userId");
-		modelAndView.setViewName("home");
+		session.invalidate();  
+		modelAndView.setViewName("redirect:/");
 		LOGGER.info("Back to Home after logout");
 
 		return modelAndView;
@@ -428,7 +454,7 @@ public class HomeController {
 	ParseException, java.text.ParseException
 	{
 		ModelAndView modelAndView = new ModelAndView();
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		
 		LocationBean location = new LocationBean();
 		model.addAttribute("location",location);
@@ -478,12 +504,18 @@ public class HomeController {
 	 * This handler mapping used to show the buypolicy 
 	 */
 	@RequestMapping(value="/viewAllPolicy", method = RequestMethod.GET)
-	public ModelAndView viewAllPolicy(Model model) throws ClassNotFoundException, SQLException
+	public ModelAndView viewAllPolicy(Model model,HttpServletRequest request,HttpServletResponse response) throws ClassNotFoundException, SQLException
 	{
 		ModelAndView modelAndView = new ModelAndView();
-			
-		ArrayList<PolicyBean> viewAllPolicy = (ArrayList<PolicyBean>) policyService.viewAllPolicy();
-			
+		HttpSession session = request.getSession(false);
+		
+		if(session == null)
+		{
+			modelAndView.setViewName("redirect:/");
+		}	
+		ArrayList<PolicyBean> viewAllPolicy = (ArrayList)policyService.viewAllPolicy();
+		
+		
 		model.addAttribute("listPolicies",viewAllPolicy);
 		modelAndView.setViewName("policyView");
 		return modelAndView;
@@ -499,7 +531,12 @@ public class HomeController {
 	{
 		int id= Integer.parseInt(request.getParameter("policyId"));
 		ModelAndView modelAndView = new ModelAndView();
-
+		HttpSession session = request.getSession(false);
+		
+		if(session == null)
+		{
+			modelAndView.setViewName("redirect:/");
+		}
 		policyService.renewPolicy(id);
 		modelAndView.setViewName("AdminDashboard3");
 		return modelAndView;
@@ -514,7 +551,12 @@ public class HomeController {
 		int id= Integer.parseInt(request.getParameter("policyId"));
 		
 		ModelAndView modelAndView = new ModelAndView();
+		HttpSession session = request.getSession(false);
 		
+		if(session == null)
+		{
+			modelAndView.setViewName("redirect:/");
+		}
 		policyService.canclePoicy(id);
 
 		modelAndView.setViewName("AdminDashboard3");
@@ -530,7 +572,12 @@ public class HomeController {
 	{
 		int id= Integer.parseInt(request.getParameter("policyId"));
 		ModelAndView modelAndView = new ModelAndView();
+		HttpSession session = request.getSession(false);
 		
+		if(session == null)
+		{
+			modelAndView.setViewName("redirect:/");
+		}
 		policyService.renewPolicy(id);
 
 		modelAndView.setViewName("AdminDashboard3");
@@ -545,9 +592,13 @@ public class HomeController {
 	public ModelAndView ViewSummary(HttpServletRequest request,HttpServletResponse response, Model model ) throws IOException, ClassNotFoundException, SQLException
 	{
 		
-		  ModelAndView modelAndView = new ModelAndView();
-		  
-		  HttpSession session = request.getSession();
+		ModelAndView modelAndView = new ModelAndView();
+		HttpSession session = request.getSession(false);
+		
+		if(session == null)
+		{
+			modelAndView.setViewName("redirect:/");
+		}
 		  int userId = (Integer)session.getAttribute("userId");
 		
 		HomeOwnerService homeownerService = new HomeOwnerServiceImpl();
@@ -592,10 +643,16 @@ public class HomeController {
 	{
 
 		ModelAndView modelAndView = new ModelAndView();
+		HttpSession session = request.getSession(false);
 		
-		HttpSession session = request.getSession();
+		if(session == null)
+		{
+			modelAndView.setViewName("redirect:/");
+		}
 	    int userId = (Integer)session.getAttribute("userId");
-	    
+	
+	    PolicyBean policy= new PolicyBean();
+		model.addAttribute("policy",policy);
 	    LocationBean locationBean = locationService.findLocationByUserId(userId);
 	    
 	    if(locationBean != null)
@@ -613,8 +670,7 @@ public class HomeController {
 			HomeOwnerBean home = new HomeOwnerBean();
 			model.addAttribute("home",home);
 			
-			PolicyBean policy= new PolicyBean();
-			model.addAttribute("policy",policy);
+	
 	    	modelAndView.setViewName("UserDashboard3");
 	    }
 		
@@ -629,7 +685,13 @@ public class HomeController {
 	@RequestMapping(value="/cancelPolicyByUser")
 	public ModelAndView cancelPolicyByUser(HttpServletRequest request,HttpServletResponse response,Model model ) throws IOException, ClassNotFoundException, SQLException
 	{
-		HttpSession session = request.getSession();
+		ModelAndView modelAndView = new ModelAndView();
+		HttpSession session = request.getSession(false);
+		
+		if(session == null)
+		{
+			modelAndView.setViewName("redirect:/");
+		}
 	    int userId = (Integer)session.getAttribute("userId");
 	    
 	    LocationBean location = new LocationBean();
@@ -640,9 +702,7 @@ public class HomeController {
 		
 		PolicyBean policy= new PolicyBean();
 		model.addAttribute("policy",policy);
-		
-		ModelAndView modelAndView = new ModelAndView();
-		
+				
 		PolicyBean policy1 =policyService.viewPolicyByUserId(userId);
 		
 		policyService.canclePoicy(policy1.getPolicyId());
@@ -654,9 +714,15 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/premiumDetails")
-	public ModelAndView premiumDetails()
+	public ModelAndView premiumDetails(HttpServletRequest request,HttpServletResponse response)
 	{
 		ModelAndView modelAndView = new ModelAndView();
+		HttpSession session = request.getSession(false);
+		
+		if(session == null)
+		{
+			modelAndView.setViewName("redirect:/");
+		}
 		modelAndView.setViewName("PremiumDetails");
 		return modelAndView;
 		
