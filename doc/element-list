@@ -1,0 +1,14 @@
+com.junit
+com.junit.dao.test
+com.junit.service.test
+com.root.bean
+com.root.config
+com.root.controller
+com.root.dao
+com.root.entity
+com.root.exception
+com.root.frontcontroller
+com.root.objectConverter
+com.root.service
+com.root.testing
+com.root.utility

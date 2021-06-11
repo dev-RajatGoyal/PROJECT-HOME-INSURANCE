@@ -20,22 +20,22 @@ import com.root.dao.PolicyDAOImpl;
 	System.out.println(noOfDaysBetween);}
 	*/	
 					
-	String sDate1="31/12/2017";
-	Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);	
-	sDate1="31/12/2020";
-	Date date2 =new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);	
+	String sDate1="05/01/2020";
+	//Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);	
+	sDate1="31/12/2021";
+	//Date date2 =new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);	
 
 			    PolicyBean  p=new PolicyBean();
 	    
-				p.setEffectiveDate(date1);
-				p.setEndDate(date2);
-				p.setPolicyStatus("Active");
+				p.setEffectiveDate(sDate1);
+				p.setEndDate(sDate1);
+				p.setPolicyStatus("InActive");
 				p.setPolicyTerm(40);
 				
 				UserBean us=new UserBean();
-				us.setuserid(1007);
+				us.setuserid(103);
 				QuoteBean qb=new QuoteBean();
-				qb.setQuote_id(15);
+				qb.setQuote_id(5);
 				
 				PolicyDAOImpl ser=new PolicyDAOImpl();
 				ser.buyPolicy(p,us,qb);

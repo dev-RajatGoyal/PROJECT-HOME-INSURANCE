@@ -1,24 +1,41 @@
 package com.root.bean;
 
 import org.apache.log4j.Logger;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Range;
 
+import com.sun.istack.NotNull;
+
+/**
+ * This is PropertyBean class 
+ * 
+ * This bean class contains data member, constructor, getter setter methods and toString() method
+ * 
+ * it contain spring validation by using some annotation like:- @Range, @Size, @NotNull etc
+ * 
+ * Bean class mainly interact with the Service Layer
+ */
 public class PropertyBean {
 	static final Logger LOGGER = Logger.getLogger(PropertyBean.class);
 	
+	@NotNull
+	@Range(min=100,max=200)
 	private int property_id;
+	
+	@NotNull
 	private int market_value;
+	@NotNull
 	private int year_built;
+	@NotNull
 	private int square_footage;
+	
+	@NotEmpty
 	private String dwelling_type;
+	@NotEmpty
 	private String roof_material;
+	@NotEmpty
 	private String garage_type;
-	@Override
-	public String toString() {
-		return "PropertyBean [property_id=" + property_id + ", market_value=" + market_value + ", year_built="
-				+ year_built + ", square_footage=" + square_footage + ", dwelling_type=" + dwelling_type
-				+ ", roof_material=" + roof_material + ", garage_type=" + garage_type + ", full_baths=" + full_baths
-				+ ", half_baths=" + half_baths + ", pool=" + pool + "]";
-	}
+
 	private int full_baths;
 	private int half_baths;
 	private int pool;
@@ -84,6 +101,15 @@ public class PropertyBean {
 	}
 	public void setPool(int pool) {
 		this.pool = pool;
+	}
+	
+	
+	
+	public String toString() {
+		return "PropertyBean [property_id=" + property_id + ", market_value=" + market_value + ", year_built="
+				+ year_built + ", square_footage=" + square_footage + ", dwelling_type=" + dwelling_type
+				+ ", roof_material=" + roof_material + ", garage_type=" + garage_type + ", full_baths=" + full_baths
+				+ ", half_baths=" + half_baths + ", pool=" + pool + "]";
 	}
 	
 }

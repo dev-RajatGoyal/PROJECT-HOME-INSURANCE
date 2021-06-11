@@ -1,30 +1,51 @@
 package com.root.service;
 
-import java.sql.SQLException;
+import java.sql.SQLException; 
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.root.bean.LocationBean;
 import com.root.bean.QuoteBean;
 import com.root.dao.LocationDao;
 import com.root.dao.LocationDaoImpl;
-import com.root.dao.QuoteDAO;
 import com.root.dao.QuoteDAOImpl;
 import com.root.entity.PropertyEntity;
-
+/**
+ * This class is to interact with Controller
+ * 
+ * QuoteServiceImpl will interact with QuoteDAOImpl internally
+ * 
+ * This Service class is mainly works with BEAN objects
+ */
+@Service
 public class QuoteServiceImpl implements QuoteService {
 	static final Logger LOGGER = Logger.getLogger(QuoteServiceImpl.class);
-	private QuoteDAO quoteDao = new QuoteDAOImpl();
+	@Autowired
+	QuoteDAOImpl quoteDao;
 
+	/**
+	 * create the object of LocationDAO
+	 */
 	LocationDao locationDao = new LocationDaoImpl();
+	
 
+	/**
+	 * 	This method will be invoked from Controller to bind the object fetched from MVC FORM
+	 * 	
+	 *  This is a addQuote method
+	 * 
+	 */
 	public int addQuote(int locationId) throws ClassNotFoundException, SQLException {
 		LOGGER.info("Inside Add Quote Method from QuoteServiceImpl");
 		LocationBean locationBean = locationDao.findLocationByLocationId(locationId);
 		
 		System.out.println("test location in quoteService"+locationBean);
         System.out.println(locationBean.getProperty().getProperty_id());
-		
+		/**
+		 * business logic for monthly premium by residence type
+		 */
 		QuoteBean quoteBean = new QuoteBean();
 		
 		float FamilyYearlyPremium = 0;
@@ -61,8 +82,10 @@ public class QuoteServiceImpl implements QuoteService {
 		float monthlyPremium = annualPremium / 12;
 		quoteBean.setMonthly_premium(monthlyPremium);
 
-		// ---------------------------- business logic for dwelling
-		// coverage------------------------------
+		/**
+		 * business logic for dwelling coverage
+		 */
+	
 
 		float squareFeet = locationBean.getProperty().getSquare_footage();
 		float buildYear = locationBean.getProperty().getYear_built();
@@ -91,36 +114,47 @@ public class QuoteServiceImpl implements QuoteService {
 
 		quoteBean.setDwelling_coverage(dwellingCoverage1);
 
-		// ------------------------- business logic for Detached
-		// Structures------------------------------
+		
+		/**
+		 * business logic for detached Structures
+		 */
+		
 
 		float detachedStructure = (float) (dwellingCoverage1 * 0.10);
 		System.out.println("Detached Structure   " + detachedStructure);
 		quoteBean.setDetached_structures(detachedStructure);
 
-		// -------------------------- business logic for Personal
-		// property--------------------------------
+		/**
+		 * business logic for personal property
+		 */
+		
 
 		float personalProperty = (float) (dwellingCoverage1 * 0.60);
 		System.out.println("Personal Property   " + personalProperty);
 		quoteBean.setPersonal_property(personalProperty);
-
-		// ---------------------------business logic for Additional
-		// living--------------------------------
+		
+		/**
+		 * business logic for Additional living
+		 */
+		
 
 		float additionalLiving = (float) (dwellingCoverage1 * 0.20);
 		System.out.println("Additional Living   " + additionalLiving);
 		quoteBean.setAdd_living_exp(additionalLiving);
 
-		// -------------------------- business logic for Medical
-		// Expense---------------------------------
+		/**
+		 * business logic for medical expense
+		 */
+	
 
 		float medicalExpense = 5000;
 
 		System.out.println("Medical Expense    " + medicalExpense);
 
-		// -------------------------- business logic for deductible
-		// ---------------------------------------
+		/**
+		 * business logic for deductible
+		 */
+	
 
 		float deductible = (float) ((float) coverage * 0.01);
 		quoteBean.setDeductible(deductible);
@@ -138,6 +172,19 @@ public class QuoteServiceImpl implements QuoteService {
 	public QuoteBean findQuoteById(int quoteID) throws ClassNotFoundException, SQLException {
 		
 		return quoteDao.findQuoteById(quoteID);
+	}
+	
+
+	/**
+	 * 	This method will be invoked from Controller to bind the object fetched from MVC FORM
+	 * 	
+	 *  It will call findQuoteByLocationID method from dao layer internally find data from database
+	 * 
+	 */
+	public QuoteBean findQuoteByLocationId(int locationID) throws ClassNotFoundException, SQLException {
+		
+		return quoteDao.findQuoteByLocationId(locationID);
+		 
 	}
 
 }

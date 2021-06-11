@@ -4,18 +4,25 @@ import org.apache.log4j.Logger;
 
 import com.root.bean.HomeOwnerBean;
 import com.root.bean.LocationBean;
+import com.root.bean.PolicyBean;
 import com.root.bean.PropertyBean;
 import com.root.bean.QuoteBean;
 import com.root.bean.UserBean;
 import com.root.entity.HomeOwnerEntity;
 import com.root.entity.LocationEntity;
+import com.root.entity.PolicyEntity;
 import com.root.entity.PropertyEntity;
 import com.root.entity.QuoteEntity;
 import com.root.entity.UserEntity;
-
+/**
+ * This is ObjectConverter Class by this class we convert entity class to Bean and bean class to entity
+ */
 public class ObjectConverter {
 	static final Logger LOGGER = Logger.getLogger(ObjectConverter.class);
 
+	/**
+	 * this method convert HomeOwnerBean to HomeOwnerEntity
+	 */
 	public HomeOwnerEntity convertHomeBenasToEntity(HomeOwnerBean home) {
 		LOGGER.info("Inside the convertHomeBeanToEntity Method");
 		HomeOwnerEntity entity = new HomeOwnerEntity();
@@ -32,6 +39,9 @@ public class ObjectConverter {
 
 	}
 
+	/**
+	 * this method convert LocationBean to LocationEntity
+	 */
 	public LocationEntity convertLocationBeansToEntity(LocationBean bean) {
 		LOGGER.info("Inside the convertLocationBeansToEntity Method");
 		LocationEntity entity = new LocationEntity();
@@ -50,7 +60,9 @@ public class ObjectConverter {
 	}
 
 	
-
+	/**
+	 * this method convert LocationEntity to LocationBean
+	 */
 	public LocationBean convertLocationEntityToBean(LocationEntity entity) {
 		LOGGER.info("Inside the convertLocationEntityToBean Method");
 		LocationBean bean = new LocationBean();
@@ -68,6 +80,9 @@ public class ObjectConverter {
 
 	}
 	
+	/**
+	 * this method convert UserBean to UserEntity
+	 */
 	public UserEntity convertUserBeansToEntity(UserBean bean) {
 		LOGGER.info("Inside the convertUserBeansToEntity Method");
 		UserEntity entity = new UserEntity();
@@ -82,6 +97,10 @@ public class ObjectConverter {
 		return entity;
 
 	}
+	
+	/**
+	 * this method convert UserEntity to UserBean
+	 */
 	public UserBean convertUserEntityToBean(UserEntity entity) {
 		LOGGER.info("Inside the convertUserEntityToBean Method");
 		UserBean bean = new UserBean();
@@ -97,7 +116,9 @@ public class ObjectConverter {
 
 	}
 
-
+	/**
+	 * this method convert PropertyBean to PropertyEntity
+	 */
 	public PropertyEntity convertPropertyBeanToEntity(PropertyBean propertyBean) {
 		LOGGER.info("Inside the convertPropertyBeanToEntity Method");
 		PropertyEntity propertyEntity = new PropertyEntity();
@@ -118,7 +139,9 @@ public class ObjectConverter {
 	}
 	
 	
-	
+	/**
+	 * this method convert PropertyEntity to PropertyBean
+	 */
 	public PropertyBean convertPropertyEntityToBean(PropertyEntity entity) {
 		LOGGER.info("Inside the convertPropertyEntityToBean Method");
 		PropertyBean bean= new PropertyBean();
@@ -138,6 +161,9 @@ public class ObjectConverter {
 
 	}
 	
+	/**
+	 * this method convert QuoteEntity to QuoteBean
+	 */
 	public QuoteBean convertQuoteEntityToBean(QuoteEntity entity)
 	{
 		QuoteBean bean = new QuoteBean();
@@ -154,7 +180,9 @@ public class ObjectConverter {
 		return bean;
 	}
 	
-	
+	/**
+	 * this method convert QuoteBean to QuoteEntity
+	 */
 	public QuoteEntity convertQuoteBeanToEntity(QuoteBean bean)
 	{
 		QuoteEntity entity = new QuoteEntity();
@@ -170,4 +198,58 @@ public class ObjectConverter {
 		
 		return entity;
 	}
+	
+	/**
+	 * this method convert PolicyBean to PolicyEntity
+	 */
+	public PolicyEntity convertPolicyBeanToEntity(PolicyBean policyBean)
+	{
+		PolicyEntity policyEntity = new PolicyEntity();
+		
+		policyEntity.setPolicy_id(policyBean.getPolicyId());
+		policyEntity.setEffective_date(policyBean.getEffectiveDate());
+		policyEntity.setEnd_date(policyBean.getEndDate());
+		policyEntity.setPolicy_status(policyBean.getPolicyStatus());
+		policyEntity.setTerm(policyBean.getPolicyTerm());
+		
+		return policyEntity;
+	}
+	
+	/**
+	 * this method convert PolicyEntity to PolicyBean
+	 */
+	public PolicyBean convertPolicyEntityToBean(PolicyEntity policyEntity)
+	{
+		PolicyBean policyBean=new PolicyBean();
+		
+		policyBean.setEffectiveDate(policyEntity.getEffective_date());
+		policyBean.setEndDate(policyEntity.getEnd_date());
+		policyBean.setPolicyId(policyEntity.getPolicy_id());
+		policyBean.setPolicyStatus(policyEntity.getPolicy_status());
+		policyBean.setPolicyTerm(policyEntity.getPolicy_id());
+		
+		
+		return policyBean;
+	}
+	
+	/**
+	 * this method convert HomeEntity to HomeBean
+	 */
+	public HomeOwnerBean convertHomeEntityToBean(HomeOwnerEntity entity) {
+		LOGGER.info("Inside the convertHomeEntityToBean Method");
+		HomeOwnerBean bean = new HomeOwnerBean();
+
+		bean.setDob(entity.getDob());
+		bean.setEmail(entity.getEmail());
+		bean.setFname(entity.getFname());
+		bean.setLname(entity.getLname());
+		bean.setOwnerId(entity.getOwnerId());
+		bean.setRetired(entity.getRetired());
+		bean.setSocialSocietyNumber(entity.getSocialSocietyNumber());
+		
+		LOGGER.info("Convert HomeOwnerEntity to HomeOwnerBean Successfully");
+		return bean;
+
+	}
+	
 }

@@ -10,8 +10,6 @@
 	integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="css/regstyle.css">
-
-
 <style type="text/css">
 .error {
 	color: red;
@@ -19,36 +17,25 @@
 }
 </style>
 <script type="text/javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+	</script>
 	<!-- 
 	<script type="text/javascript" src="../abc.js">
 	</script> -->
 <script>
 
 $(document).ready(function() {
-
     $('#form').submit(function(e) {
       e.preventDefault();
-      var userid = $("#userid").val();
-	var username = $("#username").val();
-	var role = $("#role").val();
-	var password = $("#password").val();
-	var cpassword = $("#cpassword").val();
-	var email = $("#email").val();
-
+    var userid = $("#userid").val();
+   var email = $("#email").val();
       $(".error").remove();
       if (userid.length < 1) {
-	        $('#userid').after('<span class="error">This field is required</span>');
+	        $('#userid').after('<span class="error">This field is required user id</span>');
 	      }
-     
-      if (role.length < 1) {
-	        $('#role').after('<span class="error">This field is required</span>');
-	      }   
       if (email.length < 1) {
-	        $('#email').after('<span class="error">This field is required</span>');
+	        $('#email').after('<span class="error">This field is required email </span>');
 	      }
-	      
-     
     });//submit
     
  
@@ -57,22 +44,25 @@ $(document).ready(function() {
 <script>
     function madeAjaxCall() {
 	var userid = $("#userid").val();
-	var role = $("#role").val();
 	var email = $("#email").val();
 	if(userid.length<1)
 	    return ;
-	if(role.length<1)
-	    return ;
-	if(email.length<1)
-	    return ;
-	
+	if(email.length<1){
+	    alert("email must conatined on special character and digit");
+		 return ;
+	}
+	if(email.length>1){
+	    if(!email.indexOf('@')){
+	    	alert("email must conatined @ special character and digit");
+	     return ;
+		 }
+	}
 	
 	$.ajax({
 	    type : "POST",
 	    url : 'updatePassword',
 	    data : {
 		userid : userid,
-		role : role,
 		email : email
 	    },
 	    cache : false,
@@ -113,16 +103,6 @@ $(document).ready(function() {
 					<label>Email :: </label> <input type="text" name="email"
 						id="email" placeholder="Enter your email address" >
 				</div>
-
-
-				<div class="form-control">
-				<label>New Password :: </label> <input type="password"  name="role" id="role"
-				 placeholder="Enter your new password" >
-				
-
-				</div>
-
-
 
 				<input type="submit" value="Submit" class="btn" name=""
 					onclick="madeAjaxCall()">

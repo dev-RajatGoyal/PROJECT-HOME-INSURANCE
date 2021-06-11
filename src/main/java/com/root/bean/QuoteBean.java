@@ -2,6 +2,15 @@ package com.root.bean;
 
 import org.apache.log4j.Logger;
 
+/**
+ * This is QuoteBean class 
+ * 
+ * This bean class contains data member, constructor, getter setter methods and toString() method
+ * 
+ * it contain spring validation by using some annotation like:- @Range, @Size, @NotNull etc
+ * 
+ * Bean class mainly interact with the Service Layer
+ */
 public class QuoteBean {
 	static final Logger LOGGER = Logger.getLogger(QuoteBean.class);
 	private int quote_id;

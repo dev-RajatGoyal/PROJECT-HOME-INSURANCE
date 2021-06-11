@@ -1,5 +1,5 @@
 package com.root.entity;
-import java.util.Date;
+
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,17 +10,36 @@ import javax.persistence.Table;
 
 import org.apache.log4j.Logger;
 
+/**
+ * This is PolicyEntity class 
+ * 
+ * This entity class contains data member, getter setter methods
+ * 
+ * it contain annotations, these annotation create the table name(@Table), column name(@column), primarykey(@Id) etc
+ * 
+ * it is mainly used to JPA with the help of entity class user able to insert,update,delete data into database
+ * 
+ * Entity class mainly interact with the Dao layer
+ */
 @Entity
 @Table(name="policy")
 public class PolicyEntity {
 	static final Logger LOGGER = Logger.getLogger(PolicyEntity.class);
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int policy_id;
-	@OneToOne
-	private QuoteEntity quoteEntity;
+	private String effective_date;
+	private String end_date;
+	private int term;
+	private String policy_status;
+
 	@OneToOne
 	private UserEntity userEntity;
+	@OneToOne
+	private QuoteEntity quoteEntity;
+	
+	
 	
 	public QuoteEntity getQuoteEntity() {
 		LOGGER.info("Inside the Policy Entity");
@@ -46,11 +65,7 @@ public class PolicyEntity {
 	public void setPolicy_status(String policy_status) {
 		this.policy_status = policy_status;
 	}
-	private Date effective_date;
-	private Date end_date;
-	private int term;
-	private String policy_status;
-
+	
 	/**
 	 * @return the policy_id
 	 */
@@ -69,28 +84,28 @@ public class PolicyEntity {
 	/**
 	 * @return the effective_date
 	 */
-	public Date getEffective_date() {
+	public String getEffective_date() {
 		return effective_date;
 	}
 
 	/**
 	 * @param effective_date the effective_date to set
 	 */
-	public void setEffective_date(Date effective_date) {
+	public void setEffective_date(String effective_date) {
 		this.effective_date = effective_date;
 	}
 
 	/**
 	 * @return the end_date
 	 */
-	public Date getEnd_date() {
+	public String getEnd_date() {
 		return end_date;
 	}
 
 	/**
 	 * @param end_date the end_date to set
 	 */
-	public void setEnd_date(Date end_date) {
+	public void setEnd_date(String end_date) {
 		this.end_date = end_date;
 	}
 

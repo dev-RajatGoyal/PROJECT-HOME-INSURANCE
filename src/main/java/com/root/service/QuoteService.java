@@ -11,5 +11,6 @@ public interface QuoteService {
 
 	int addQuote(int LocationId) throws ClassNotFoundException, SQLException;
 	QuoteBean findQuoteById(int quoteID) throws ClassNotFoundException, SQLException;
+	QuoteBean findQuoteByLocationId(int locationID)throws ClassNotFoundException, SQLException;
 	
 }

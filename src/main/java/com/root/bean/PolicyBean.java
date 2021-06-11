@@ -3,13 +3,22 @@ import java.util.Date;
 
 import org.apache.log4j.Logger;
 
+/**
+ * This is PolicyBean class 
+ * 
+ * This bean class contains data member, constructor, getter setter methods and toString() method
+ * 
+ * it contain spring validation by using some annotation like:- @Range, @Size, @NotNull etc
+ * 
+ * Bean class mainly interact with the Service Layer
+ */
 public class PolicyBean {
 	static final Logger LOGGER = Logger.getLogger(PolicyBean.class);
 	private int policyId;
 	private QuoteBean quote;
 	private UserBean user;
-	private Date effectiveDate;
-	private Date endDate;
+	private String effectiveDate;
+	private String endDate;
 	private int policyTerm;
 	private String policyStatus;
 
@@ -42,19 +51,19 @@ public class PolicyBean {
 
 
 
-	public Date getEffectiveDate() {
+	public String getEffectiveDate() {
 		return effectiveDate;
 	}
 
-	public void setEffectiveDate(Date effectiveDate) {
+	public void setEffectiveDate(String effectiveDate) {
 		this.effectiveDate = effectiveDate;
 	}
 
-	public Date getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 

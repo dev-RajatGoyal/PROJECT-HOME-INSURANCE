@@ -1,17 +1,42 @@
 package com.root.bean;
 
-import org.apache.log4j.Logger;
+import javax.validation.constraints.Size;
 
+import org.apache.log4j.Logger;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Range;
+
+import com.sun.istack.NotNull;
+
+/**
+ * This is LocationBean class 
+ * 
+ * This bean class contains data member, constructor, getter setter methods and toString() method
+ * 
+ * it contain spring validation by using some annotation like:- @Range, @Size, @NotNull etc
+ * 
+ * Bean class mainly interact with the Service Layer
+ */
 public class LocationBean {
 	static final Logger LOGGER = Logger.getLogger(LocationBean.class);
 
+	@NotNull
+	@Range(min=100,max=200)
 	private int location_id ;
+	
+	@NotEmpty
 	private String residence_type;
+	
+	@NotEmpty
 	private String address_line_1;
 	private String address_line_2;
+	@NotEmpty
 	private String city;
+	@NotEmpty
 	private String location_state ;
+	@NotEmpty
 	private String zip_code ;
+	@NotEmpty
 	private String residence_use ;
 	
 	

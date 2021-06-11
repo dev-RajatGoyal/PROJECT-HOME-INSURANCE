@@ -38,6 +38,22 @@ body{
 	align-items: center;
 	text-align: center;
 }
+.login-content .test a:link, a:visited {
+  background-color: #32be8f;
+  color: white;
+  margin-left:400px;
+  	border-radius: 25px;
+  padding: 12px 80px;
+
+  display: inline-block;
+  margin-bottom:80px;
+  font-family: 'Poppins', sans-serif;
+font-size: 110%;
+}
+
+.login-content.test a:hover, a:active {
+  background-color: red;
+}
 
 .img img{
 	width: 500px;
@@ -57,6 +73,7 @@ form{
 	text-transform: uppercase;
 	font-size: 2.9rem;
 }
+
 
 .login-content .input-div{
 	position: relative;
@@ -147,7 +164,7 @@ form{
 	margin-bottom: 4px;
 }
 
-a{
+ .container a{
 	display: block;
 	text-align: right;
 	text-decoration: none;
@@ -155,10 +172,12 @@ a{
 	font-size: 0.9rem;
 	transition: .3s;
 }
+ 
 
-a:hover{
+ .container a:hover{
 	color: #38d39f;
-}
+} 
+
 
 .btn{
 	display: block;
@@ -176,10 +195,14 @@ a:hover{
 	margin: 1rem 0;
 	cursor: pointer;
 	transition: .5s;
+	
 }
+
 .btn:hover{
 	background-position: right;
 }
+
+
 
 
 @media screen and (max-width: 1050px){

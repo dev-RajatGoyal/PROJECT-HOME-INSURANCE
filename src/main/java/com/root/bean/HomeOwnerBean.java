@@ -2,17 +2,44 @@ package com.root.bean;
 
 import java.util.Date;
 
-import org.apache.log4j.Logger;
+import javax.validation.constraints.Size;
 
+import org.apache.log4j.Logger;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Range;
+
+import com.sun.istack.NotNull;
+
+/**
+ * This is homeOwnerBean class 
+ * 
+ * This bean class contains data member, constructor, getter setter methods and toString() method
+ * 
+ * it contain spring validation by using some annotation like:- @Range, @Size, @NotNull etc
+ * 
+ * Bean class mainly interact with the Service Layer
+ */
 public class HomeOwnerBean {
 	static final Logger LOGGER = Logger.getLogger(HomeOwnerBean.class);
 
+	@Range(min=100,max=200,message="* it should be between 100-200")
 	private int ownerId;
+	
+	@Size(max=10,min=2)
 	private String fname;
+	
 	private String lname;
+	
+	@NotNull
 	private Date dob;
+	
+	@NotEmpty
 	private String retired;
+	
+	@NotNull
 	private int socialSocietyNumber;
+	
+	@NotEmpty
 	private String email;
 	
 	private UserBean user;

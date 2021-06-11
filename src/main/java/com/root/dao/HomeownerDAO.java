@@ -6,4 +6,5 @@ import com.root.bean.UserBean;
 public interface HomeownerDAO {
 
 	int insertHomeOwner(HomeOwnerBean homeOwner);
+	public HomeOwnerBean findHomeownerByUserId(int UserID);
 }

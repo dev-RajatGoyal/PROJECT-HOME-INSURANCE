@@ -1,10 +1,13 @@
 package com.root.dao;
 
+import java.sql.SQLException;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Repository;
 
 import com.root.bean.LocationBean;
 import com.root.bean.PropertyBean;
@@ -14,6 +17,20 @@ import com.root.entity.PropertyEntity;
 import com.root.entity.UserEntity;
 import com.root.objectConverter.ObjectConverter;
 
+
+/**
+ * @author Rehan Ansari
+ *
+ */
+/**
+ * @author Rehan Ansari
+ *
+ */
+/**
+ * @author Rehan Ansari
+ *
+ */
+@Repository
 public class LocationDaoImpl implements LocationDao {
 	static final Logger LOGGER = Logger.getLogger(LocationDaoImpl.class);
 	
@@ -177,7 +194,7 @@ public class LocationDaoImpl implements LocationDao {
 			/**
 			 * convert LocationEntity object to LocationBean
 			 */
-			System.out.println("*************"+entity+" entity from locationDAO");
+			System.out.println("*****"+entity+" entity from locationDAO");
 		    UserEntity user =entity.getUserEntity();
 		    PropertyEntity property = entity.getPropertyEntity();
 		
@@ -200,8 +217,68 @@ public class LocationDaoImpl implements LocationDao {
 				entityManager.close();
 			}
 		}
+		/**
+		 * Returning locationBean object after fetching from the database
+		 */	
 		return bean;
 		
+	}
+	
+	
+	
+	
+	
+	
+	
+   /**
+    * 	findLocationByUserId method used for find location by userId
+    */
+
+	public LocationBean findLocationByUserId(int userId) throws ClassNotFoundException, SQLException {
+		
+		EntityManager entityManager = null;
+		LocationBean bean = null;
+		try
+		{
+
+			/**
+			 * Create Entity ManagerFactory Object for calling the unit calling unit where
+			 * we define our database details for achieving JPA part
+			 */
+			EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("unit1");
+			entityManager = entityManagerFactory.createEntityManager();
+			
+			
+			LocationEntity location = (LocationEntity) entityManager.createQuery("from LocationEntity l where  l.userEntity.user_id = "+userId).getSingleResult();
+			
+			/**
+			 * ObjectConverter is a class for object convert we need to convert bean object
+			 * to entity to use database
+			 */
+			ObjectConverter converter = new ObjectConverter();
+			
+			/**
+			 * convert LocationEntity object to LocationBean 
+			 */
+			UserEntity userEntity = location.getUserEntity();
+			PropertyEntity propertyEntity = location.getPropertyEntity();
+
+			bean = converter.convertLocationEntityToBean(location);
+			bean.setUser(converter.convertUserEntityToBean(userEntity));
+			bean.setProperty(converter.convertPropertyEntityToBean(propertyEntity));
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			entityManager.close();
+		}
+		/**
+		 * Returning locationBean object after fetching from the database
+		 */	
+		return bean;
 	}
 
 }

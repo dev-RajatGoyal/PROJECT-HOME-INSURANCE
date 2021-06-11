@@ -10,4 +10,5 @@ public interface QuoteDAO {
 
 	int addQuote(LocationBean locationBean, QuoteBean quoteBean) throws ClassNotFoundException, SQLException;
 	QuoteBean findQuoteById(int quoteID) throws ClassNotFoundException, SQLException;
+	QuoteBean findQuoteByLocationId(int locationID)throws ClassNotFoundException, SQLException;
 }

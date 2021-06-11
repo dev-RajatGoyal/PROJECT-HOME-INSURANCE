@@ -10,6 +10,17 @@ import javax.persistence.Table;
 
 import org.apache.log4j.Logger;
 
+/**
+ * This is QuoteEntity class 
+ * 
+ * This entity class contains data member, getter setter methods
+ * 
+ * it contain annotations, these annotation create the table name(@Table), column name(@column), primarykey(@Id) etc
+ * 
+ * it is mainly used to JPA with the help of entity class user able to insert,update,delete data into database
+ * 
+ * Entity class mainly interact with the Dao layer
+ */
 @Entity
 @Table(name="quotes")
 public class QuoteEntity {
